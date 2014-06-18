@@ -17,7 +17,31 @@
       <th>Income</th>
       <th>Economical liability</th>
       <th>Number of child</th>
+      <th>Child 1 Age</th>
+      <th>Child 1 Date of Birth</th>
+      <th>Child 2 Age</th>
+      <th>Child 2 Date of Birth</th>
+      <th>Child 3 Age</th>
+      <th>Child 3 Date of Birth</th>
+      <th>Child 4 Age</th>
+      <th>Child 4 Date of Birth</th>
       <th>Anniversary date</th>
+      <th>Short Term Goal</th>
+      <th>Long Term Goal</th>
+      <th>Retirement age</th>
+      <th>Child Education</th>
+      <th>Child Marriage</th>
+      <th>Retirement Pension</th>
+      <th>Fixed Income</th>
+      <th>Equity</th>
+      <th>Gold</th>
+      <th>Land and Estate</th>
+      <th>House Owned</th>
+      <th>House Rented</th>
+      <th>House Co Provided</th>
+      <th>Four Wheeler</th>
+      <th>Two Wheeler</th>
+      <th>No Vehicle</th>
       <th></th>
       <th></th>
       <th></th>
@@ -42,7 +66,27 @@
         <td><%= client_info.income %></td>
         <td><%= client_info.economical_liability %></td>
         <td><%= client_info.number_of_child %></td>
+        <% client_info.child_infos.each do |child| %>
+            <td><%= child.age %></td>
+            <td><%= child.date_of_birth %></td>
+        <% end %>
         <td><%= client_info.anniversary_date %></td>
+        <td><%= client_info.short_term_goal %></td>
+        <td><%= client_info.long_term_goal %></td>
+        <td><%= client_info.retirement_age %></td>
+        <td><%= client_info.plan_child_education %></td>
+        <td><%= client_info.plan_child_marriage %></td>
+        <td><%= client_info.plan_retirement_fund %></td>
+        <td><%= client_info.investment_type.fix_income %></td>
+        <td><%= client_info.investment_type.equity %></td>
+        <td><%= client_info.investment_type.gold %></td>
+        <td><%= client_info.investment_type.land_and_estate %></td>
+        <td><%= client_info.house.owned %></td>
+        <td><%= client_info.house.rented %></td>
+        <td><%= client_info.house.co_provider %></td>
+        <td><%= client_info.vehicle.four_wheeler %></td>
+        <td><%= client_info.vehicle.two_wheeler %></td>
+        <td><%= client_info.vehicle.none %></td>
         <td><%= link_to 'Show', client_info %></td>
         <td><%= link_to 'Edit', edit_client_info_path(client_info) %></td>
         <td><%= link_to 'Destroy', client_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>

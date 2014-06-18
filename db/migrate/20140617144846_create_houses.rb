@@ -4,7 +4,7 @@ class CreateHouses < ActiveRecord::Migration
       t.integer :owned
       t.integer :rented
       t.integer :co_provider
-
+      t.integer :client_info_id
       t.timestamps
     end
   end
