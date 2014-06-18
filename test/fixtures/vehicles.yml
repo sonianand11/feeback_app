@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  four_wheeler: 1
+  two_wheeler: 1
+  none: 1
+
+two:
+  four_wheeler: 1
+  two_wheeler: 1
+  none: 1

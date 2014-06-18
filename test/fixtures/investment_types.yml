@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fix_income: 1.5
+  equity: 1.5
+  gold: 
+  land_and_estate: 1.5
+  client_info_id: 1
+
+two:
+  fix_income: 1.5
+  equity: 1.5
+  gold: 
+  land_and_estate: 1.5
+  client_info_id: 1

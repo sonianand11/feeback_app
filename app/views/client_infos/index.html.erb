@@ -1,0 +1,55 @@
+<h1>Client List</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Pincode</th>
+      <th>Date of birth</th>
+      <th>Mobile</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Education</th>
+      <th>Occupation</th>
+      <th>Job post</th>
+      <th>Name of company</th>
+      <th>Job expirience year</th>
+      <th>Income</th>
+      <th>Economical liability</th>
+      <th>Number of child</th>
+      <th>Anniversary date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @client_infos.each do |client_info| %>
+      <tr>
+        <td><%= client_info.name %></td>
+        <td><%= client_info.address %></td>
+        <td><%= client_info.pincode %></td>
+        <td><%= client_info.date_of_birth %></td>
+        <td><%= client_info.mobile %></td>
+        <td><%= client_info.phone %></td>
+        <td><%= client_info.email %></td>
+        <td><%= client_info.education %></td>
+        <td><%= client_info.occupation %></td>
+        <td><%= client_info.job_post %></td>
+        <td><%= client_info.name_of_company %></td>
+        <td><%= client_info.job_expirience_year %></td>
+        <td><%= client_info.income %></td>
+        <td><%= client_info.economical_liability %></td>
+        <td><%= client_info.number_of_child %></td>
+        <td><%= client_info.anniversary_date %></td>
+        <td><%= link_to 'Show', client_info %></td>
+        <td><%= link_to 'Edit', edit_client_info_path(client_info) %></td>
+        <td><%= link_to 'Destroy', client_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= link_to 'New Client info', new_client_info_path %>

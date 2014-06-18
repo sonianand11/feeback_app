@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  address: MyText
+  pincode: 1
+  date_of_birth: 2014-06-17 20:17:00
+  mobile: MyString
+  phone: MyString
+  email: MyString
+  education: MyString
+  occupation: MyString
+  job_post: MyString
+  name_of_company: MyString
+  job_expirience_year: 1
+  income: 
+  economical_liability: 
+  number_of_child: 1
+  anniversary_date: 2014-06-17 20:17:00
+  intend_to_work: MyString
+  short_term_goal: MyString
+  long_term_goal: MyString
+  retirement_age: 1
+  plan_child_education: MyString
+  plan_child_marriage: MyString
+  plan_retirement_fund: MyString
+
+two:
+  name: MyString
+  address: MyText
+  pincode: 1
+  date_of_birth: 2014-06-17 20:17:00
+  mobile: MyString
+  phone: MyString
+  email: MyString
+  education: MyString
+  occupation: MyString
+  job_post: MyString
+  name_of_company: MyString
+  job_expirience_year: 1
+  income: 
+  economical_liability: 
+  number_of_child: 1
+  anniversary_date: 2014-06-17 20:17:00
+  intend_to_work: MyString
+  short_term_goal: MyString
+  long_term_goal: MyString
+  retirement_age: 1
+  plan_child_education: MyString
+  plan_child_marriage: MyString
+  plan_retirement_fund: MyString

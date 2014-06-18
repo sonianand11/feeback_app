@@ -1,0 +1,13 @@
+rails g scaffold client_info name:string address:text pincode:integer date_of_birth:datetime mobile:string phone:string email:string education:string occupation:string job_post:string name_of_company:string job_expirience_year:integer income:float economical_liability:float number_of_child:integer anniversary_date:datetime intend_to_work:string short_term_goal:string long_term_goal:string retirement_age:integer plan_child_education:string plan_child_marriage:string plan_retirement_fund:string 
+
+rails g model client_info name:string address:text pincode:integer date_of_birth:datetime mobile:string phone:string email:string education:string occupation:string job_post:string name_of_company:string job_expirience_year:integer income:float economical_liability:float number_of_child:integer anniversary_date:datetime intend_to_work:string short_term_goal:string long_term_goal:string retirement_age:integer plan_child_education:string plan_child_marriage:string plan_retirement_fund:string 
+
+Investment Type
+rails g model investment_type fix_income:float equity:float gold:folat land_and_estate:float client_info_id:integer
+
+Child Info
+rails g model child_info age:integer date_of_birth:datetime client_info_id:integer
+
+Personal Assets
+rails g model house owned:integer rented:integer co_provider:integer
+rails g model vehicle four_wheeler:integer two_wheeler:integer none:integer
