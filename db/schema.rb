@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140617144848) do
     t.integer  "owned"
     t.integer  "rented"
     t.integer  "co_provider"
+    t.integer  "client_info_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 20140617144848) do
     t.integer  "four_wheeler"
     t.integer  "two_wheeler"
     t.integer  "none"
+    t.integer  "client_info_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

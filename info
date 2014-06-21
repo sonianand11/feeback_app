@@ -9,5 +9,5 @@ Child Info
 rails g model child_info age:integer date_of_birth:datetime client_info_id:integer
 
 Personal Assets
-rails g model house owned:integer rented:integer co_provider:integer
-rails g model vehicle four_wheeler:integer two_wheeler:integer none:integer
+rails g model house owned:integer rented:integer co_provider:integer client_info_id:integer
+rails g model vehicle four_wheeler:integer two_wheeler:integer none:integer client_info_id:integer

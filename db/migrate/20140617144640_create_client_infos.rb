@@ -1,4 +1,4 @@
-class CreateClientInfos < ActiveRecord::Migration
+  class CreateClientInfos < ActiveRecord::Migration
   def change
     create_table :client_infos do |t|
       t.string :name

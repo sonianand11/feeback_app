@@ -2,6 +2,9 @@ Feedback::Application.routes.draw do
   root 'client_infos#index'
   resources :client_infos
 
+  get "/download_xlsx" => "client_infos#download_xlsx"
+  get "/download_pdf" => "client_infos#download_pdf"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Agendas">
+    <Table>
+      <Row>
+
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"><b><i>List of client Info</i></b></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Serial No</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Address</Data></Cell>
+        <Cell><Data ss:Type="String">Pincode</Data></Cell>
+        <Cell><Data ss:Type="String">Date of birth</Data></Cell>
+        <Cell><Data ss:Type="String">Mobile</Data></Cell>
+        <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Education</Data></Cell>
+        <Cell><Data ss:Type="String">Occupation</Data></Cell>
+        <Cell><Data ss:Type="String">Job post</Data></Cell>
+        <Cell><Data ss:Type="String">Name of company</Data></Cell>
+        <Cell><Data ss:Type="String">Job expirience year</Data></Cell>
+        <Cell><Data ss:Type="String">Income</Data></Cell>
+        <Cell><Data ss:Type="String">Economical liability</Data></Cell>
+        <Cell><Data ss:Type="String">Number of child</Data></Cell>
+        <Cell><Data ss:Type="String">Child 1 Age</Data></Cell>
+        <Cell><Data ss:Type="String">Child 1 Date of Birth</Data></Cell>
+        <Cell><Data ss:Type="String">Child 2 Age</Data></Cell>
+        <Cell><Data ss:Type="String">Child 2 Date of Birth</Data></Cell>
+        <Cell><Data ss:Type="String">Child 3 Age</Data></Cell>
+        <Cell><Data ss:Type="String">Child 3 Date of Birth</Data></Cell>
+        <Cell><Data ss:Type="String">Child 4 Age</Data></Cell>
+        <Cell><Data ss:Type="String">Child 4 Date of Birth</Data></Cell>
+        <Cell><Data ss:Type="String">Anniversary date</Data></Cell>
+        <Cell><Data ss:Type="String">Short Term Goal</Data></Cell>
+        <Cell><Data ss:Type="String">Long Term Goal</Data></Cell>
+        <Cell><Data ss:Type="String">Retirement age</Data></Cell>
+        <Cell><Data ss:Type="String">Child Education</Data></Cell>
+        <Cell><Data ss:Type="String">Child Marriage</Data></Cell>
+        <Cell><Data ss:Type="String">Retirement Pension</Data></Cell>
+        <Cell><Data ss:Type="String">Fixed Income</Data></Cell>
+        <Cell><Data ss:Type="String">Equity</Data></Cell>
+        <Cell><Data ss:Type="String">Gold</Data></Cell>
+        <Cell><Data ss:Type="String">Land and Estate</Data></Cell>
+        <Cell><Data ss:Type="String">House Owned</Data></Cell>
+        <Cell><Data ss:Type="String">House Rented</Data></Cell>
+        <Cell><Data ss:Type="String">House Co Provided</Data></Cell>
+        <Cell><Data ss:Type="String">Four Wheeler</Data></Cell>
+        <Cell><Data ss:Type="String">Two Wheeler</Data></Cell>
+        <Cell><Data ss:Type="String">No Vehicle</Data></Cell>
+      </Row>
+      <% @client_infos.each_with_index do |client_info,index| %>
+          <Row>
+            <Cell><Data ss:Type="Number"><%= index+1 %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.address %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.pincode %></Data></Cell>
+            <Cell><Data ss:Type="Date"><%= client_info.date_of_birth.strftime("%F") %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.mobile %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.phone %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.email %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.education %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.occupation %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.job_post %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.name_of_company %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.job_expirience_year %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= client_info.income %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= client_info.economical_liability %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.number_of_child %></Data></Cell>
+            <% client_info.child_infos.each do |child| %>
+                <Cell><Data ss:Type="Number"><%= child.age %></Data></Cell>
+                <% if !child.date_of_birth.nil? %>
+                    <Cell><Data ss:Type="Date"><%= child.date_of_birth.strftime("%F") %></Data></Cell>
+                <% else %>
+                    <Cell><Data ss:Type="Date"></Data></Cell>
+                <% end %>
+            <% end %>
+            <Cell><Data ss:Type="Date"><%= client_info.anniversary_date.strftime("%F") %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.short_term_goal %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.long_term_goal %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.retirement_age %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.plan_child_education %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.plan_child_marriage %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= client_info.plan_retirement_fund %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= client_info.investment_type.fix_income %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= client_info.investment_type.equity %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= client_info.investment_type.gold %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= client_info.investment_type.land_and_estate %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.house.owned %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.house.rented %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.house.co_provider %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.vehicle.four_wheeler %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.vehicle.two_wheeler %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.vehicle.none %></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
