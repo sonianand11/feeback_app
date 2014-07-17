@@ -1,3 +1,13 @@
+<script>
+	$(function() {
+		$( "#dateOfBirth" ).datepicker();
+		$( "#anniversaryDate" ).datepicker();
+		$( "#child1DatePicker" ).datepicker();
+		$( "#child2DatePicker" ).datepicker();
+		$( "#child3DatePicker" ).datepicker();
+		$( "#child4DatePicker" ).datepicker();
+	});
+</script>
 <%= form_for(@client_info) do |f| %>
   <% if @client_info.errors.any? %>
     <div id="error_explanation">
@@ -12,11 +22,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label "Client Name" %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :address %><br>
+    <%= f.label "Client Address" %><br>
     <%= f.text_area :address %>
   </div>
   <div class="field">
@@ -25,15 +35,15 @@
   </div>
   <div class="field">
     <%= f.label :date_of_birth %><br>
-    <%= f.date_select :date_of_birth %>
+    <%= f.text_field :date_of_birth , :id => "dateOfBirth"%>
   </div>
   <div class="field">
     <%= f.label :mobile %><br>
-    <%= f.text_field :mobile %>
+    <%= f.number_field :mobile %>
   </div>
   <div class="field">
     <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
+    <%= f.number_field :phone %>
   </div>
   <div class="field">
     <%= f.label :email %><br>
@@ -73,25 +83,25 @@
   </div>
   <div class="field">
     <%= f.label :anniversary_date %><br>
-    <%= f.date_select :anniversary_date %>
+    <%= f.text_field :anniversary_date,:id => "anniversaryDate" %>
   </div>
  <br><br>
 	Child Age :(1) <input type="number" name="child_info[age[1]]"><br>
 	Child Age :(2) <input type="number" name="child_info[age[2]]"><br>
 	Child Age :(3) <input type="number" name="child_info[age[3]]"><br>
 	Child Age :(4) <input type="number" name="child_info[age[4]]"><br>
-	Child Date of Birth :(1) <input type="date" name="child_info[dob[1]]"><br>
-	Child Date of Birth :(2) <input type="date" name="child_info[dob[2]]"><br>
-	Child Date of Birth :(3) <input type="date" name="child_info[dob[3]]"><br>
-	Child Date of Birth :(4) <input type="date" name="child_info[dob[4]]"><br>
+	Child Date of Birth :(1) <input type="text" name="child_info[dob[1]]" id="child1DatePicker"><br>
+	Child Date of Birth :(2) <input type="text" name="child_info[dob[2]]" id="child2DatePicker"><br>
+	Child Date of Birth :(3) <input type="text" name="child_info[dob[3]]" id="child3DatePicker"><br>
+	Child Date of Birth :(4) <input type="text" name="child_info[dob[4]]" id="child4DatePicker"><br>
 	<br>
 	Personal Assets<br>
-	House : <input type="number" name="house[owned]"> Owned<br>
-	<input type="number" name="house[rented]"> Rented<br>
+	House : <input type="number" name="house[owned]"> Owned
+	<input type="number" name="house[rented]"> Rented
 	<input type="number" name="house[co_provider]"> Co Provided<br>
 	
-	Vehicle : <input type="number" name="vehicle[four_wheeler]"> 4 Wheeler<br>
-	<input type="number" name="vehicle[two_wheeler]"> 2 Wheeler<br>
+	Vehicle : <input type="number" name="vehicle[four_wheeler]"> 4 Wheeler
+	<input type="number" name="vehicle[two_wheeler]"> 2 Wheeler
 	<input type="number" name="vehicle[none]"> None<br>
 	<br>
 	How Many More Years Do You Intend To Work ?<br>
@@ -108,7 +118,7 @@
 	<br>
 	What Age would you wish to Retire ?  <input type="text" name="client_info[retirement_age]"> <br>
 	
-	Have you planned for your:-
+	Have you planned for your:-<br>
 	1) Child Education <input type="text" name="client_info[plan_child_education]"> <br>
 	2) Child Marriage <input type="text" name="client_info[plan_child_marriage]"> <br>
 	3) Retirement fund <input type="text" name="client_info[plan_retirement_fund]"> <br>

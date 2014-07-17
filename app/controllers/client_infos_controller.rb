@@ -27,19 +27,23 @@ class ClientInfosController < ApplicationController
   def create
     @client_info = ClientInfo.new(client_info_params)
 
-    p params[:child_info]
-    ChildInfo.create(:age => params[:child_info][:age]["1"],:date_of_birth => params[:child_info][:dob]["1"], :client_info_id => @client_info.id )
     respond_to do |format|
       if @client_info.save
+      
         ChildInfo.create(:age => params[:child_info][:age]["1"],:date_of_birth => params[:child_info][:dob]["1"], :client_info_id => @client_info.id )
-        ChildInfo.create(:age => params[:child_info][:age]["2"],:date_of_birth => params[:child_info][:dob]["2"], :client_info_id => @client_info.id )
-        ChildInfo.create(:age => params[:child_info][:age]["3"],:date_of_birth => params[:child_info][:dob]["3"], :client_info_id => @client_info.id )
-        ChildInfo.create(:age => params[:child_info][:age]["4"],:date_of_birth => params[:child_info][:dob]["4"], :client_info_id => @client_info.id )
+        ChildInfo.create(:age => params[:child_info][:age]["2"],:date_of_birth => params[:child_info][:dob]["2"], :client_info_id => @client_info.id ) if params[:child_info][:age]["2"].present?
+        ChildInfo.create(:age => params[:child_info][:age]["3"],:date_of_birth => params[:child_info][:dob]["3"], :client_info_id => @client_info.id ) if params[:child_info][:age]["3"].present?
+        ChildInfo.create(:age => params[:child_info][:age]["4"],:date_of_birth => params[:child_info][:dob]["4"], :client_info_id => @client_info.id ) if params[:child_info][:age]["4"].present?
+        
         InvestmentType.create(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate], :client_info_id => @client_info.id )
+        
         House.create(:owned => params[:house][:owned],:rented => params[:house][:rented],:co_provider => params[:house][:co_provider], :client_info_id => @client_info.id)
+        
         Vehicle.create(:four_wheeler => params[:vehicle][:four_wheeler],:two_wheeler => params[:vehicle][:two_wheeler],:none => params[:vehicle][:none],:client_info_id => @client_info.id)
+        
         format.html { redirect_to @client_info, notice: 'Client info was successfully created.' }
         format.json { render action: 'show', status: :created, location: @client_info }
+        
       else
         format.html { render action: 'new' }
         format.json { render json: @client_info.errors, status: :unprocessable_entity }
@@ -52,9 +56,23 @@ class ClientInfosController < ApplicationController
   def update
     respond_to do |format|
       if @client_info.update(client_info_params)
+      
+	      @client_info.child_infos.destroy_all
+
+        ChildInfo.create(:age => params[:child_info][:age]["1"],:date_of_birth => params[:child_info][:dob]["1"], :client_info_id => @client_info.id )
+        ChildInfo.create(:age => params[:child_info][:age]["2"],:date_of_birth => params[:child_info][:dob]["2"], :client_info_id => @client_info.id ) if params[:child_info][:age]["2"].present?
+        ChildInfo.create(:age => params[:child_info][:age]["3"],:date_of_birth => params[:child_info][:dob]["3"], :client_info_id => @client_info.id ) if params[:child_info][:age]["3"].present?
+        ChildInfo.create(:age => params[:child_info][:age]["4"],:date_of_birth => params[:child_info][:dob]["4"], :client_info_id => @client_info.id ) if params[:child_info][:age]["4"].present?
+
+        @client_info.investment_type.update(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate], :client_info_id => @client_info.id )
+        
+        @client_info.house.update(:owned => params[:house][:owned],:rented => params[:house][:rented],:co_provider => params[:house][:co_provider], :client_info_id => @client_info.id)
+        
+        @client_info.vehicle.update(:four_wheeler => params[:vehicle][:four_wheeler],:two_wheeler => params[:vehicle][:two_wheeler],:none => params[:vehicle][:none],:client_info_id => @client_info.id)
 
         format.html { redirect_to @client_info, notice: 'Client info was successfully updated.' }
         format.json { head :no_content }
+        
       else
         format.html { render action: 'edit' }
         format.json { render json: @client_info.errors, status: :unprocessable_entity }
