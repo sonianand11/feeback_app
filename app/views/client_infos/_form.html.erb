@@ -1,11 +1,11 @@
 <script>
 	$(function() {
-		$( "#dateOfBirth" ).datepicker();
-		$( "#anniversaryDate" ).datepicker();
-		$( "#child1DatePicker" ).datepicker();
-		$( "#child2DatePicker" ).datepicker();
-		$( "#child3DatePicker" ).datepicker();
-		$( "#child4DatePicker" ).datepicker();
+		$( "#dateOfBirth" ).datepicker({ dateFormat: 'dd-mm-yy' });
+		$( "#anniversaryDate" ).datepicker({ dateFormat: 'dd-mm-yy' });
+		$( "#child1DatePicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+		$( "#child2DatePicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+		$( "#child3DatePicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+		$( "#child4DatePicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
 	});
 </script>
 <%= form_for(@client_info) do |f| %>

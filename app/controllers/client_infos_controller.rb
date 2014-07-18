@@ -26,14 +26,17 @@ class ClientInfosController < ApplicationController
   # POST /client_infos.json
   def create
     @client_info = ClientInfo.new(client_info_params)
-
     respond_to do |format|
       if @client_info.save
-      
-        ChildInfo.create(:age => params[:child_info][:age]["1"],:date_of_birth => params[:child_info][:dob]["1"], :client_info_id => @client_info.id )
-        ChildInfo.create(:age => params[:child_info][:age]["2"],:date_of_birth => params[:child_info][:dob]["2"], :client_info_id => @client_info.id ) if params[:child_info][:age]["2"].present?
-        ChildInfo.create(:age => params[:child_info][:age]["3"],:date_of_birth => params[:child_info][:dob]["3"], :client_info_id => @client_info.id ) if params[:child_info][:age]["3"].present?
-        ChildInfo.create(:age => params[:child_info][:age]["4"],:date_of_birth => params[:child_info][:dob]["4"], :client_info_id => @client_info.id ) if params[:child_info][:age]["4"].present?
+
+        i=1
+        while(i<=4)
+          ChildInfo.create(:age => params[:child_info][:age]["#{i}"],:date_of_birth => params[:child_info][:dob]["#{i}"], :client_info_id => @client_info.id ) if params[:child_info][:age]["#{i}"].present?
+          i+=1
+        end
+        #ChildInfo.create(:age => params[:child_info][:age]["2"],:date_of_birth => params[:child_info][:dob]["2"], :client_info_id => @client_info.id ) if params[:child_info][:age]["2"].present?
+        #ChildInfo.create(:age => params[:child_info][:age]["3"],:date_of_birth => params[:child_info][:dob]["3"], :client_info_id => @client_info.id ) if params[:child_info][:age]["3"].present?
+        #ChildInfo.create(:age => params[:child_info][:age]["4"],:date_of_birth => params[:child_info][:dob]["4"], :client_info_id => @client_info.id ) if params[:child_info][:age]["4"].present?
         
         InvestmentType.create(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate], :client_info_id => @client_info.id )
         
