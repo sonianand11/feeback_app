@@ -11,3 +11,17 @@
  *= require_self
  *= require_tree .
  */
+ div label {
+     display: inline-block;
+     width: 200px;
+ }
+
+div input {
+    width: 250px;
+    margin-left: 50px;
+}
+
+div textarea {
+    width: 250px;
+    margin-left: 50px;
+}
