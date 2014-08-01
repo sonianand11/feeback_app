@@ -1,5 +1,5 @@
 <h1>Client List</h1>
-<table>
+<table class="table" border="1">
   <thead>
     <tr>
       <th>Name</th>
@@ -99,6 +99,6 @@
 </table>
 <br>
 
-<%= link_to 'New Client info', new_client_info_path %>
-<%= link_to "Download Excel", download_xlsx_path(format: "xlsx") %>
-<%= link_to "Download Pdf", download_pdf_path(format: "pdf") %>
+<%= link_to 'New Client info', new_client_info_path, class: "btn"  %>
+<%= link_to "Download Excel", download_xlsx_path(format: "xlsx") , class: "btn"%>
+<%= link_to "Download Pdf", download_pdf_path(format: "pdf") ,class: "btn"%>
