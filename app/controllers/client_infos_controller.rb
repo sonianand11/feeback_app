@@ -142,7 +142,7 @@ class ClientInfosController < ApplicationController
         text "Name: #{client.name}"
         text "Address: #{client.address}"
         text "Pincode: #{client.pincode}"
-        text "Date Of Birth: #{client.date_of_birth.strftime("%F")}"
+        text "Date Of Birth: #{client.date_of_birth.strftime("%F") rescue ""}"
         text "Mobile: #{client.mobile}"
         text "Phone: #{client.phone}"
         text "Email: #{client.email}"
@@ -158,12 +158,12 @@ class ClientInfosController < ApplicationController
         client.child_infos.each_with_index do |child,i|
             text "Child #{i+1} Age: #{child.age}"
             if !child.date_of_birth.nil?
-              text "Child #{i+1} Date of Birth: #{child.date_of_birth.strftime("%F")}"
+              text "Child #{i+1} Date of Birth: #{child.date_of_birth.strftime("%F") rescue ""}"
             else
               text "Child #{i+1} Date of Birth: "
             end
         end
-        text "Client Anniversary Date: #{client.anniversary_date.strftime("%F")}"
+        text "Client Anniversary Date: #{client.anniversary_date.strftime("%F") rescue ""}"
         text "Personal Assets"
         text "House Owned: #{client.house.owned}"
         text "House Rented: #{client.house.rented}"

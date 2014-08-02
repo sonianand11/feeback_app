@@ -10,7 +10,7 @@
 </script>
 <form class="form-style" role="form" style="padding: 20px 100px 20px 100px;text-indent:30px;text-justify: auto;">
 <%= form_for(@client_info) do |f| %>
- <fieldset style="background-color:white">
+ <fieldset style="background-color:white;">
  <b><h2 style="text-align: center;">Client Feedback Form</h2></b><br>
  <hr/>
  <% if @client_info.errors.any? %>
@@ -79,11 +79,11 @@
   </div>
   <div class="field">
     <%#= f.label :job_expirience_year %>
-    Job experiance Field : <%= f.number_field :job_expirience_year, :style => "margin-left: 189px;" %>
+    Job experiance Field : <%= f.number_field :job_expirience_year,:value => 1, :style => "margin-left: 189px;" %>
   </div>
   <div class="field">
     <%#= f.label :income %>
-    Income<%= f.text_field :income, :style => "margin-left: 286px;" %>
+    Income<%= f.text_field :income,:value => 100000, :style => "margin-left: 286px;" %>
   </div>
   <div class="field">
     <%#= f.label :economical_liability %>
@@ -93,19 +93,19 @@
   <b><h4>Child/Children Detail :</h4></b><br>
   <div class="field">
     <%#= f.label :number_of_child %>
-    Number of Child<%= f.number_field :number_of_child, :style => "margin-left: 231px;" %>
+    Number of Child<%= f.number_field :number_of_child,:value => 0, :style => "margin-left: 231px;" %>
   </div>
  <div class="field">
-	Child Age :(1) <input type="number" name="child_info[age[1]]" style="margin-left: 244px;"><br>
+	Child Age :(1) <input type="number" value="0" name="child_info[age[1]]" style="margin-left: 244px;"><br>
  </div>
  <div class="field">
-	Child Age :(2) <input type="number" name="child_info[age[2]]" style="margin-left: 244px;"><br>
+	Child Age :(2) <input type="number" value="0"  name="child_info[age[2]]" style="margin-left: 244px;"><br>
  </div>
    <div class="field">
-     Child Age :(3) <input type="number" name="child_info[age[3]]" style="margin-left: 244px;"><br>
+     Child Age :(3) <input type="number" value="0"  name="child_info[age[3]]" style="margin-left: 244px;"><br>
    </div>
    <div class="field">
-     Child Age :(4) <input type="number" name="child_info[age[4]]" style="margin-left: 244px;"><br>
+     Child Age :(4) <input type="number" value="0"  name="child_info[age[4]]" style="margin-left: 244px;"><br>
    </div>
    <div class="field">
      Child Date of Birth :(1) <input type="text" name="child_info[dob[1]]" id="child1DatePicker" style="margin-left: 191px;"><br>
@@ -127,32 +127,40 @@
    <b><h4>Personal Assets :</h4></b><br>
    <h5>House : </h5><br/>
    </div>
+  <div style="margin-top: -50px;">
+    <div class="field">
+      <input type="number" value="0"  name="house[owned]" style="margin-left: 335px;"> Owned
+    </div>
+    <div class="field">
+      <input type="number" value="0"  name="house[rented]" style="margin-left: 335px;"> Rented
+    </div>
+    <div class="field">
+      <input type="number" value="0"  name="house[co_provider]" style="margin-left: 335px;"> Co Provided<br>
+    </div>
+  </div>
   <div class="field">
-    <input type="number" name="house[owned]" style="margin-left: 335px;"> Owned
-   </div>
-   <div class="field">
-     <input type="number" name="house[rented]" style="margin-left: 335px;"> Rented
-   </div>
-   <div class="field">
-     <input type="number" name="house[co_provider]" style="margin-left: 335px;"> Co Provided<br>
-   </div>
-   <div class="field">
+  <h5>Vehicle : </h5>
+  </div>
+  <div  style="margin-top: -35px;" >
+    <div class="field">
 
-     <h5>Vehicle : </h5><input type="number" name="vehicle[four_wheeler]" style="margin-left: 365px;"> 4 Wheeler
-   </div>
-   <div class="field">
-   <input type="number" name="vehicle[two_wheeler]" style="margin-left: 335px;"> 2 Wheeler
-   </div>
-   <div class="field">
-     <input type="number" name="vehicle[none]" style="margin-left: 335px;"> None<br>
-	</div>
+      <input type="number"  value="0" name="vehicle[four_wheeler]" style="margin-left: 335px;"> 4 Wheeler
+    </div>
+    <div class="field">
+      <input type="number"  value="0" name="vehicle[two_wheeler]" style="margin-left: 335px;"> 2 Wheeler
+    </div>
+    <div class="field">
+      <input type="number"  value="0" name="vehicle[none]" style="margin-left: 335px;"> None<br>
+    </div>
+  </div>
+
    <hr>
    <b><h4>Future Planning :</h4></b>
    <div class="field">
      How Many More Years Do You Intend To Work ?
    <!--</div>-->
    <!--<div class="field">-->
-   <input type="radio" name="client_info[intend_to_work]" value="<5" style="margin-left: 25px;">< 5 Year
+   <input type="radio" name="client_info[intend_to_work]" value="<5" style="margin-left: 25px;" checked="checked">< 5 Year
 <br>	</div>
    <div class="field">
      <input type="radio" name="client_info[intend_to_work]" value="5-10" style="margin-left: 339px;">5 To 10 Year<br>
@@ -200,16 +208,16 @@
   </div>
   <div class="field">
 
-  1) Fixed Income ( FD, POST, PPF) <input type="text" name="investment_type[fix_income]" style="margin-left: 110px;">%<br>
+  1) Fixed Income ( FD, POST, PPF) <input type="text"  value="0" name="investment_type[fix_income]" style="margin-left: 110px;">%<br>
    </div>
    <div class="field">
-     2) Equity( Direct, MF, SIP) <input type="text" name="investment_type[equity]" style="margin-left: 166px;">%<br>
+     2) Equity( Direct, MF, SIP) <input type="text"  value="0" name="investment_type[equity]" style="margin-left: 166px;">%<br>
    </div>
    <div class="field">
-     3) Gold <input type="text" name="investment_type[gold]" style="margin-left: 285px">%<br>
+     3) Gold <input type="text" name="investment_type[gold]"  value="0" style="margin-left: 285px">%<br>
    </div>
    <div class="field">
-     4) Land & Estate <input type="text" name="investment_type[land_and_estate]" style="margin-left: 226px;">%<br>
+     4) Land & Estate <input type="text" name="investment_type[land_and_estate]"  value="0" style="margin-left: 226px;">%<br>
 <br>
    </div>
    <div class="field">
@@ -236,12 +244,13 @@ little risk<br>
 </div>
 
 <h2 style="text-align: center;">Thank You</h2>
-<div class="actions" style="width: 200px; text-align: center; margin-left: 100px; margin-bottom: 20px; ">
-    <%= f.submit(:class => "btn btn-large btn-primary", :style => "width: 820px;")%>
+<div class="actions" style="text-align: center; margin-left: -10%; margin-bottom: 20px;">
+    <%= f.submit(:class => "btn btn-large")%>  <%= link_to 'Back', client_infos_path,:class => "btn btn-large" %>
+
+
 </div>
-  <div class="field">
-    <%= link_to 'Back', client_infos_path %>
-  </div>
+  <!--<div class="field">-->
+  <!--</div>-->
 
  </fieldset>
 
