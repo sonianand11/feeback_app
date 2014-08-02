@@ -25,7 +25,7 @@
         <td><%= client_info.email %></td>
         <td><%= link_to 'Show', client_info, class: "btn"  %></td>
         <td><%= link_to 'Edit', edit_client_info_path(client_info), class: "btn"  %></td>
-        <td><%= link_to 'Destroy', client_info, class: "btn",  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', client_info, class: "btn btn-danger",  method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to "Download Excel", download_xlsx_path(id: client_info.id,format: "xlsx"), class: "btn"  %> </td>
         <td><%= link_to "Download Pdf", download_pdf_path(id: client_info.id,format: "pdf"), class: "btn"  %></td>
       </tr>
