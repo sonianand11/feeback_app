@@ -136,54 +136,80 @@ class ClientInfosController < ApplicationController
   private
 
   def generate_pdf(client_info)
+    p client_info
     Prawn::Document.new do
       client_info.each_with_index do |client,index|
-        text "\n Client #{index+1}", align: :center
-        text "Name: #{client.name}"
-        text "Address: #{client.address}"
-        text "Pincode: #{client.pincode}"
-        text "Date Of Birth: #{client.date_of_birth.strftime("%F") rescue ""}"
-        text "Mobile: #{client.mobile}"
-        text "Phone: #{client.phone}"
-        text "Email: #{client.email}"
-        text "Education: #{client.education}"
-        text "Occupation: #{client.occupation}"
-        text "Job Post: #{client.job_post}"
-        text "Name Of Company: #{client.name_of_company}"
-        text "Job Experience: #{client.job_expirience_year}"
-        text "Income: #{client.income}"
-        text "Economical Liability: #{client.economical_liability}"
-        text "Number of Child: #{client.number_of_child}"
-        text "Child Details"
-        client.child_infos.each_with_index do |child,i|
-            text "Child #{i+1} Age: #{child.age}"
-            if !child.date_of_birth.nil?
-              text "Child #{i+1} Date of Birth: #{child.date_of_birth.strftime("%F") rescue ""}"
-            else
-              text "Child #{i+1} Date of Birth: "
-            end
+        if client_info.length != 1
+          pad_bottom(10) { text "\n Client #{index+1} Feedback Information", align: :center, :size => 32 }
+        else
+          pad_bottom(10) { text "\n Client #{client.name} Feedback Information", align: :center, :size => 32 }
         end
-        text "Client Anniversary Date: #{client.anniversary_date.strftime("%F") rescue ""}"
-        text "Personal Assets"
-        text "House Owned: #{client.house.owned}"
-        text "House Rented: #{client.house.rented}"
-        text "House Co Provider: #{client.house.co_provider}"
-        text "Four Wheeler: #{client.vehicle.four_wheeler}"
-        text "Two Wheeler: #{client.vehicle.two_wheeler}"
-        text "No Vehicle: #{client.vehicle.none}"
-        text "Short Term Goal: #{client.short_term_goal}"
-        text "Long Term Goal: #{client.long_term_goal}"
-        text "Retirement Age: #{client.retirement_age}"
-        text "Plan"
-        text "Child Education: #{client.plan_child_education}"
-        text "Child Merriage: #{client.plan_child_marriage}"
-        text "Retirement Fund: #{client.plan_retirement_fund}"
-        text "Investment"
-        text "Fix Income: #{client.investment_type.fix_income}"
-        text "Equity: #{client.investment_type.equity}"
-        text "Gold: #{client.investment_type.gold}"
-        text "Land and Estate: #{client.investment_type.land_and_estate}"
-
+        stroke_horizontal_rule
+        pad(10) { text "<b>Client Infirmation : </b>", :size => 20,:inline_format => true  }
+        indent(30) do
+          data = [[ "<b>Name:</b> #{client.name}","<b>Mobile:</b> #{client.mobile}"],
+                ["<b>Address:</b> #{client.address}","<b>Phone:</b> #{client.phone}"],
+                ["<b>Pincode:</b> #{client.pincode}","<b>Email:</b> #{client.email}"],
+                ["<b>Date Of Birth:</b> #{client.date_of_birth.strftime("%F") rescue ""}","<b>Client Anniversary Date:</b> #{client.anniversary_date.strftime("%F") rescue ""}"]]
+          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
+        end
+        pad(10) { text "<b>Education & Job details : </b>",:size => 20, :inline_format => true }
+        indent(30) do
+          data = [["<b>Education:</b> #{client.education}","<b>Occupation:</b> #{client.occupation}"],
+                  ["<b>Name Of Company:</b> #{client.name_of_company}","<b>Job Post:</b> #{client.job_post}"],
+                  ["<b>Job Experience:</b> #{client.job_expirience_year}","<b>Income:</b> #{client.income}"],
+                  ["<b>Economical Liability:</b> #{client.economical_liability}","<b>Retirement Age:</b> #{client.retirement_age}"]]
+          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
+        end
+        pad(10){text "<b>Child Details</b>", :size => 20,:inline_format => true }
+        indent(30) do
+          pad(5){text "<b>Number of Child: </b> #{client.number_of_child}", :inline_format => true }
+          data = []
+          client.child_infos.each_with_index do |child,i|
+            if !child.date_of_birth.nil?
+              data << ["<b>Child #{i+1} Age:</b> #{child.age}","<b>Child #{i+1} Date of Birth:</b> #{child.date_of_birth.strftime("%F") rescue ""}"]
+            else
+              data<< ["<b>Child #{i+1} Age:</b> #{child.age}","<b>Child #{i+1} Date of Birth: </b>"]
+            end
+          end
+          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
+        end
+        pad(10){text "<b>Personal Assets</b>", :size => 20,:inline_format => true  }
+        indent(30) do
+          data = [["<b>House Owned:</b> #{client.house.owned}","<b>Four Wheeler:</b> #{client.vehicle.four_wheeler}"],
+                  ["<b>House Rented:</b> #{client.house.rented}","<b>Two Wheeler:</b> #{client.vehicle.two_wheeler}"],
+                  ["<b>House Co Provider:</b> #{client.house.co_provider}","<b>No Vehicle:</b> #{client.vehicle.none}"]]
+          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
+        end
+        pad(10){text "<b>Future Goal</b>", :size => 20,:inline_format => true }
+        indent(30) do
+          data = [["<b>Short Term Goal:</b> #{client.short_term_goal}","<b>Long Term Goal:</b> #{client.long_term_goal}"]]
+          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
+        end
+        pad(10){text "<b>Plan</b>", :size => 20,:inline_format => true }
+        indent(30) do
+          data = [["<b>Child Education:</b> #{client.plan_child_education}","<b>Child Merriage:</b> #{client.plan_child_marriage}"],
+                  ["<b>Retirement Fund:</b> #{client.plan_retirement_fund}",""]]
+          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
+        end
+        pad(10){text "<b>Investment</b>", :size => 20,:inline_format => true }
+        indent(30) do
+          data = [["<b>Fix Income:</b> #{client.investment_type.fix_income}%","<b>Equity:</b> #{client.investment_type.equity}%"],
+                  ["<b>Gold:</b> #{client.investment_type.gold}%","<b>Land and Estate:</b> #{client.investment_type.land_and_estate}%"]]
+          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
+        end
+        if client_info.length != 1
+          start_new_page
+        end
+        string = "page <page> of <total>"
+        # Green page numbers 1 to 7
+        options = { :at => [bounds.right - 150, 0],
+                    :width => 150,
+                    :align => :right,
+                    :page_filter => (1..7),
+                    :start_count_at => 1,
+                    :color => "0000ff" }
+        number_pages string, options
       end
     end.render
   end

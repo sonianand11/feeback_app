@@ -8,8 +8,7 @@
 		$( "#child4DatePicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
 	});
 </script>
-<form class="form-style" role="form" style="padding: 20px 100px 20px 100px;text-indent:30px;text-justify: auto;">
-<%= form_for(@client_info) do |f| %>
+<%= form_for @client_info, :html => {:class => "form-style", :style=>"padding: 20px 100px 20px 100px;text-indent:30px;text-justify: auto;" } do |f| %>
  <fieldset style="background-color:white;">
  <b><h2 style="text-align: center;">Client Feedback Form</h2></b><br>
  <hr/>
@@ -246,13 +245,6 @@ little risk<br>
 <h2 style="text-align: center;">Thank You</h2>
 <div class="actions" style="text-align: center; margin-left: -10%; margin-bottom: 20px;">
     <%= f.submit(:class => "btn btn-large")%>  <%= link_to 'Back', client_infos_path,:class => "btn btn-large" %>
-
-
 </div>
-  <!--<div class="field">-->
-  <!--</div>-->
-
  </fieldset>
-
-    </form>
 <% end %>

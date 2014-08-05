@@ -1,7 +1,16 @@
 <div style="margin: 10px 20px 10px 20px; background-color: white;" >
   <div style="margin:40px 60px 40px 60px; padding-top: 20px;padding-bottom: 20px;">
     <p id="notice"><%= notice %></p>
+    <h2>
+      <p style="text-align: center;">
+        <strong><%= @client_info.name %> Feedback Information</strong>
+      </p>
+    </h2>
 
+    <hr/>
+    <p>
+      <strong>Client Information:</strong>
+    </p>
     <p>
       <strong>Name:</strong>
       <%= @client_info.name %>
@@ -38,7 +47,17 @@
     </p>
 
     <p>
-      <strong>Education:</strong>
+      <strong>Anniversary date:</strong>
+      <%= @client_info.anniversary_date %>
+    </p>
+
+    <hr/>
+
+    <p>
+      <strong>Education & Job Detail:</strong>
+
+    </p>
+    <strong>Education:</strong>
       <%= @client_info.education %>
     </p>
 
@@ -73,13 +92,15 @@
     </p>
 
     <p>
-      <strong>Number of child:</strong>
-      <%= @client_info.number_of_child %>
+      <strong>Retirement Age:</strong>
+      <%= @client_info.retirement_age %>
     </p>
 
+
+
+    <hr/>
     <p>
-      <strong>Anniversary date:</strong>
-      <%= @client_info.anniversary_date %>
+      <strong>Future Goal:</strong>
     </p>
 
     <p>
@@ -92,9 +113,9 @@
       <%= @client_info.long_term_goal %>
     </p>
 
+    <hr/>
     <p>
-      <strong>Retirement Age:</strong>
-      <%= @client_info.retirement_age %>
+      <strong>Future Plan:</strong>
     </p>
 
     <p>
@@ -112,9 +133,15 @@
       <%= @client_info.plan_retirement_fund %>
     </p>
 
+    <hr/>
     <p>
       <br/><br/>
-      <strong>Child Detail:</strong><br/><br/>
+      <strong>Children Detail:</strong><br/><br/>
+    </p>
+
+    <p>
+      <strong>Number of child:</strong>
+      <%= @client_info.number_of_child %>
     </p>
     <% @client_info.child_infos.each do |child,index| %>
         <p>
@@ -128,7 +155,7 @@
         </p>
     <% end %>
 
-
+    <hr/>
     <p>
       <br/><br/>
       <strong>Investment:</strong><br/><br/>
@@ -154,7 +181,7 @@
       <strong>Land & Estate:</strong>
       <%= @client_info.investment_type.land_and_estate %> %
     </p>
-
+    <hr/>
     <p>
       <br/><br/>
       <strong>Personal Assets:</strong>
