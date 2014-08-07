@@ -15,9 +15,10 @@
 		<script src="/js/jquery-ui-1.10.4.custom.js"></script>
     
   </head>
-  <body style="background-color: #f5f5f5;">
-
+  <body style="background-color: #f5f5f5; margin: 20px">
+        <%= render "layouts/header" %>
 		<%= yield %>
-
+        <br/>
+        <%= render "layouts/footer" %>
   </body>
 </html>
