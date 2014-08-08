@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.4'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 gem 'prawn'
 gem "mysql2"
 # Use SCSS for stylesheets
@@ -35,6 +34,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+#test setup
+gem "rspec-rails", :group => [:development, :test]
+gem "cucumber-rails",:group => :test, :require => false
+gem "factory_girl_rails", :group => [:development, :test]
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

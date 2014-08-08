@@ -15,7 +15,6 @@
  <% if @client_info.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@client_info.errors.count, "error") %> prohibited this client_info from being saved:</h2>
-
       <ul>
       <% @client_info.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -27,71 +26,55 @@
   <b><h4>Client Personal Information :</h4></b><br>
 
   <div class="field">
-    <%#= f.label "Client Name" %>
     Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= f.text_field :name, :style => "margin-left: 258px;"%>
   </div>
   <div class="field">
-    <%#= f.label "Client Address" %>
     Client Address : <%= f.text_area :address, :class => "form-control", :style => "margin-left: 228px;" %>
   </div>
   <div class="field">
-    <%#= f.label "Pincode" %>
     Pincode : <%= f.number_field :pincode, :style => "margin-left: 268px;" %>
   </div>
   <div class="field">
-    <%#= f.label :date_of_birth %>
     Date of Birth : <%= f.text_field :date_of_birth , :id => "dateOfBirth", :style => "margin-left: 242px;"%>
   </div>
   <div class="field">
-    <%#= f.label :mobile %>
     Mobile No : <%= f.number_field :mobile, :style => "margin-left: 258px;" %>
   </div>
   <div class="field">
-    <%#= f.label :phone %>
     Phone No : <%= f.number_field :phone, :style => "margin-left: 258px;" %>
   </div>
   <div class="field">
-    <%#= f.label :email %>
     Email : <%= f.text_field :email, :style => "margin-left: 287px;" %>
   </div>
   <div class="field">
-    <%#= f.label :anniversary_date %>
     Anniversary Date :<%= f.text_field :anniversary_date,:id => "anniversaryDate", :style => "margin-left: 218px;" %>
   </div>
   <hr>
   <b><h4>Education & Job Profile Detail :</h4></b><br>
   <div class="field">
-    <%#= f.label :education %>
     Education : <%= f.text_field :education, :style => "margin-left: 258px;" %>
   </div>
   <div class="field">
-    <%#= f.label :occupation %>
     Occupation : <%= f.text_field :occupation, :style => "margin-left: 249px;" %>
   </div>
   <div class="field">
-    <%#= f.label :job_post %>
     Job Post : <%= f.text_field :job_post, :style => "margin-left: 266px;" %>
   </div>
   <div class="field">
-    <%#= f.label :name_of_company %>
     Name of Company : <%= f.text_field :name_of_company, :style => "margin-left: 202px;" %>
   </div>
   <div class="field">
-    <%#= f.label :job_expirience_year %>
     Job experiance Field : <%= f.number_field :job_expirience_year,:value => 1, :style => "margin-left: 189px;" %>
   </div>
   <div class="field">
-    <%#= f.label :income %>
     Income<%= f.text_field :income,:value => 100000, :style => "margin-left: 286px;" %>
   </div>
   <div class="field">
-    <%#= f.label :economical_liability %>
     Economical Liability<%= f.text_field :economical_liability, :style => "margin-left: 210px;" %>
   </div>
   <hr>
   <b><h4>Child/Children Detail :</h4></b><br>
   <div class="field">
-    <%#= f.label :number_of_child %>
     Number of Child<%= f.number_field :number_of_child,:value => 0, :style => "margin-left: 231px;" %>
   </div>
  <div class="field">

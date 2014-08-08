@@ -28,21 +28,14 @@ class ClientInfosController < ApplicationController
     @client_info = ClientInfo.new(client_info_params)
     respond_to do |format|
       if @client_info.save
-
-        i=1
-        while(i<=4)
-          ChildInfo.create(:age => params[:child_info][:age]["#{i}"],:date_of_birth => params[:child_info][:dob]["#{i}"], :client_info_id => @client_info.id ) if params[:child_info][:age]["#{i}"].present?
-          i+=1
+        params[:child_info][:age].each_with_index do |child,index|
+          @client_info.child_infos.create!(:age => params[:child_info][:age]["#{index+1}"],:date_of_birth => params[:child_info][:dob]["#{index+1}"]) if params[:child_info][:age]["#{index+1}"].to_i != 0
         end
-        #ChildInfo.create(:age => params[:child_info][:age]["2"],:date_of_birth => params[:child_info][:dob]["2"], :client_info_id => @client_info.id ) if params[:child_info][:age]["2"].present?
-        #ChildInfo.create(:age => params[:child_info][:age]["3"],:date_of_birth => params[:child_info][:dob]["3"], :client_info_id => @client_info.id ) if params[:child_info][:age]["3"].present?
-        #ChildInfo.create(:age => params[:child_info][:age]["4"],:date_of_birth => params[:child_info][:dob]["4"], :client_info_id => @client_info.id ) if params[:child_info][:age]["4"].present?
-        
-        InvestmentType.create(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate], :client_info_id => @client_info.id )
-        
-        House.create(:owned => params[:house][:owned],:rented => params[:house][:rented],:co_provider => params[:house][:co_provider], :client_info_id => @client_info.id)
-        
-        Vehicle.create(:four_wheeler => params[:vehicle][:four_wheeler],:two_wheeler => params[:vehicle][:two_wheeler],:none => params[:vehicle][:none],:client_info_id => @client_info.id)
+        @client_info.create_investment_type(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate])
+
+        @client_info.create_house(:owned => params[:house][:owned],:rented => params[:house][:rented],:co_provider => params[:house][:co_provider])
+
+        @client_info.create_vehicle(:four_wheeler => params[:vehicle][:four_wheeler],:two_wheeler => params[:vehicle][:two_wheeler],:none => params[:vehicle][:none])
         
         format.html { redirect_to @client_info, notice: 'Client info was successfully created.' }
         format.json { render action: 'show', status: :created, location: @client_info }
@@ -59,20 +52,29 @@ class ClientInfosController < ApplicationController
   def update
     respond_to do |format|
       if @client_info.update(client_info_params)
-      
-	      @client_info.child_infos.destroy_all
-
-        ChildInfo.create(:age => params[:child_info][:age]["1"],:date_of_birth => params[:child_info][:dob]["1"], :client_info_id => @client_info.id )
-        ChildInfo.create(:age => params[:child_info][:age]["2"],:date_of_birth => params[:child_info][:dob]["2"], :client_info_id => @client_info.id ) if params[:child_info][:age]["2"].present?
-        ChildInfo.create(:age => params[:child_info][:age]["3"],:date_of_birth => params[:child_info][:dob]["3"], :client_info_id => @client_info.id ) if params[:child_info][:age]["3"].present?
-        ChildInfo.create(:age => params[:child_info][:age]["4"],:date_of_birth => params[:child_info][:dob]["4"], :client_info_id => @client_info.id ) if params[:child_info][:age]["4"].present?
-
-        @client_info.investment_type.update(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate], :client_info_id => @client_info.id )
-        
-        @client_info.house.update(:owned => params[:house][:owned],:rented => params[:house][:rented],:co_provider => params[:house][:co_provider], :client_info_id => @client_info.id)
-        
-        @client_info.vehicle.update(:four_wheeler => params[:vehicle][:four_wheeler],:two_wheeler => params[:vehicle][:two_wheeler],:none => params[:vehicle][:none],:client_info_id => @client_info.id)
-
+        @child_info = @client_info.child_infos.to_a
+        params[:child_info][:age].each_with_index do |child,index|
+          if @child_info[index].nil?
+            @client_info.child_infos.create!(:age => params[:child_info][:age]["#{index+1}"],:date_of_birth => params[:child_info][:dob]["#{index+1}"]) if params[:child_info][:age]["#{index+1}"].to_i != 0
+          else
+            @child_info[index].update!(:age => params[:child_info][:age]["#{index+1}"],:date_of_birth => params[:child_info][:dob]["#{index+1}"]) if params[:child_info][:age]["#{index+1}"].to_i != 0
+          end
+        end
+        if @client_info.investment_type.nil?
+          @client_info.create_investment_type(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate])
+        else
+          @client_info.investment_type.update!(:fix_income => params[:investment_type][:fix_income], :equity=>params[:investment_type][:equity], :gold=>params[:investment_type][:gold], :land_and_estate=>params[:investment_type][:land_and_estate])
+        end
+        if @client_info.house.nil?
+          @client_info.create_house(:owned => params[:house][:owned],:rented => params[:house][:rented],:co_provider => params[:house][:co_provider])
+        else
+          @client_info.house.update(:owned => params[:house][:owned],:rented => params[:house][:rented],:co_provider => params[:house][:co_provider])
+        end
+        if @client_info.vehicle.nil?
+          @client_info.create_vehicle(:four_wheeler => params[:vehicle][:four_wheeler],:two_wheeler => params[:vehicle][:two_wheeler],:none => params[:vehicle][:none])
+        else
+          @client_info.vehicle.update(:four_wheeler => params[:vehicle][:four_wheeler],:two_wheeler => params[:vehicle][:two_wheeler],:none => params[:vehicle][:none])
+        end
         format.html { redirect_to @client_info, notice: 'Client info was successfully updated.' }
         format.json { head :no_content }
         
@@ -113,11 +115,16 @@ class ClientInfosController < ApplicationController
     else
       @client_infos = ClientInfo.all
     end
+    if @client_infos.length >1
+      @file_name = "all client info - #{Time.now}"
+    else
+      @file_name = "#{@client_infos.first.name} - #{Time.now}"
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.pdf do
         send_data generate_pdf(@client_infos),
-                  filename: "download.pdf",
+                  filename: "#{@file_name}.pdf",
                   type: "application/pdf"
       end
     end
@@ -136,13 +143,19 @@ class ClientInfosController < ApplicationController
   private
 
   def generate_pdf(client_info)
-    p client_info
     Prawn::Document.new do
+      fill_color "2E64FE"
+      indent(10) do
+        text "Zimmedari<br/> ka<br/> Humsafar",:size => 40, :inline_format => true
+      end
+      image "#{Rails.root}/app/assets/images/logo.png" ,:image_width => 60, :image_height => 60, :at => [350,750]
+
       client_info.each_with_index do |client,index|
+        fill_color "000000"
         if client_info.length != 1
-          pad_bottom(10) { text "\n Client #{index+1} Feedback Information", align: :center, :size => 32 }
+          pad(10) { text "\n Client #{index+1} Feedback Information", align: :center, :size => 32 }
         else
-          pad_bottom(10) { text "\n Client #{client.name} Feedback Information", align: :center, :size => 32 }
+          pad(10) { text "\n Client #{client.name} Feedback Information", align: :center, :size => 32 }
         end
         stroke_horizontal_rule
         pad(10) { text "<b>Client Infirmation : </b>", :size => 20,:inline_format => true  }
