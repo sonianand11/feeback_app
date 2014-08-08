@@ -8,227 +8,262 @@
     <% if notice %>
         <p id="notice" class="alert alert-success alert-dismissible" role="alert"><%= notice %><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button></p>
     <% end %>
-    <h2>
-      <p style="text-align: center;">
+    <h2><p style="text-align: center;">
         <strong><%= @client_info.name %> Feedback Information</strong>
       </p>
     </h2>
 
     <hr/>
-    <p>
-      <strong>Client Information:</strong>
-    </p>
-    <p>
-      <strong>Name:</strong>
-      <%= @client_info.name %>
-    </p>
+    <h3><p style="text-align: center;">
+      <strong>Client Information</strong>
+    </p></h3>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Name:</strong>
+          <%= @client_info.name %>
+        </td>
+        <td>
+          <strong>Mobile:</strong>
+          <%= @client_info.mobile %>
+        </td>
+      </tr>
 
-    <p>
-      <strong>Address:</strong>
-      <%= @client_info.address %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>Address:</strong>
+          <%= @client_info.address %>
+        </td>
+        <td>
+          <strong>Phone:</strong>
+          <%= @client_info.phone %>
+        </td>
+      </tr>
 
-    <p>
-      <strong>Pincode:</strong>
-      <%= @client_info.pincode %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>Pincode:</strong>
+          <%= @client_info.pincode %>
+        </td>
+        <td>
+          <strong>Email:</strong>
+          <%= @client_info.email %>
+        </td>
+      </tr>
 
-    <p>
-      <strong>Date of birth:</strong>
-      <%= @client_info.date_of_birth %>
-    </p>
-
-    <p>
-      <strong>Mobile:</strong>
-      <%= @client_info.mobile %>
-    </p>
-
-    <p>
-      <strong>Phone:</strong>
-      <%= @client_info.phone %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= @client_info.email %>
-    </p>
-
-    <p>
-      <strong>Anniversary date:</strong>
-      <%= @client_info.anniversary_date %>
-    </p>
-
+      <tr style="height: 40px;">
+        <td>
+          <strong>Date of birth:</strong>
+          <%= @client_info.date_of_birth %>
+        </td>
+        <td>
+          <strong>Anniversary date:</strong>
+          <%= @client_info.anniversary_date %>
+        </td>
+      </tr>
+    </table>
     <hr/>
 
-    <p>
-      <strong>Education & Job Detail:</strong>
+    <h3><p style="text-align: center;">
+      <strong>Education & Job Detail</strong>
+    </p></h3>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Education:</strong>
+          <%= @client_info.education %>
+        </td>
+        <td>
+          <strong>Name of company:</strong>
+          <%= @client_info.name_of_company %>
+        </td>
+      </tr>
 
-    </p>
-    <strong>Education:</strong>
-      <%= @client_info.education %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>Occupation:</strong>
+          <%= @client_info.occupation %>
+        </td>
+        <td>
+          <strong>Job expirience year:</strong>
+          <%= @client_info.job_expirience_year %>
+        </td>
+      </tr>
 
-    <p>
-      <strong>Occupation:</strong>
-      <%= @client_info.occupation %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>Job post:</strong>
+          <%= @client_info.job_post %>
+        </td>
+        <td>
+          <strong>Income:</strong>
+          <%= @client_info.income %>
+        </td>
+      </tr>
 
-    <p>
-      <strong>Job post:</strong>
-      <%= @client_info.job_post %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <p>
+            <strong>Economical liability:</strong>
+            <%= @client_info.economical_liability %>
+          </p>
+        </td>
+        <td>
+          <strong>Retirement Age:</strong>
+          <%= @client_info.retirement_age %>
+        </td>
+      </tr>
+    </table>
+    <hr/>
+    <h3><p style="text-align: center;">
+      <strong>Future Goal</strong>
+    </p></h3>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Short Term Goal:</strong>
+          <%= @client_info.short_term_goal %>
+        </td>
+        <td>
+          <strong>Long Term Goal:</strong>
+          <%= @client_info.long_term_goal %>
+        </td>
+      </tr>
+    </table>
+    <hr/>
+    <h3><p style="text-align: center;">
+      <strong>Future Plan</strong>
+    </p></h3>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Child Education:</strong>
+          <%= @client_info.plan_child_education %>
+        </td>
+        <td>
+          <strong>Retirement Fund:</strong>
+          <%= @client_info.plan_retirement_fund %>
+        </td>
+      </tr>
 
-    <p>
-      <strong>Name of company:</strong>
-      <%= @client_info.name_of_company %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>Child Marriage:</strong>
+          <%= @client_info.plan_child_marriage %>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </table>
+    <hr/>
+    <h3><p style="text-align: center;">
+      <strong>Children Detail</strong><br/><br/>
+    </p></h3>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Number of child:</strong>
+          <%= @client_info.number_of_child %>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <% @client_info.child_infos.each do |child,index| %>
 
-    <p>
-      <strong>Job expirience year:</strong>
-      <%= @client_info.job_expirience_year %>
-    </p>
-
-    <p>
-      <strong>Income:</strong>
-      <%= @client_info.income %>
-    </p>
-
-    <p>
-      <strong>Economical liability:</strong>
-      <%= @client_info.economical_liability %>
-    </p>
-
-    <p>
-      <strong>Retirement Age:</strong>
-      <%= @client_info.retirement_age %>
-    </p>
-
-
+        <tr style="height: 40px;">
+          <td>
+            <strong>Child <%= index %> Age :</strong>
+            <%= child.age %>
+          </td>
+          <td>
+            <strong>Child <%= index %> Date of Birth :</strong>
+            <%= child.date_of_birth %>
+          </td>
+         </tr>
+      <% end %>
+    </table>
 
     <hr/>
-    <p>
-      <strong>Future Goal:</strong>
-    </p>
+    <h3><p style="text-align: center;">
+      <strong>Investment</strong><br/><br/>
+    </p></h3>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Fixed Income ( FD, POST, PPF):</strong>
+          <%= @client_info.investment_type.fix_income %> %
+        </td>
+        <td>
+          <strong>Equity( Direct, MF, SIP) :</strong>
+          <%= @client_info.investment_type.equity %> %
+        </td>
+      </tr>
 
-    <p>
-      <strong>Short Term Goal:</strong>
-      <%= @client_info.short_term_goal %>
-    </p>
-
-    <p>
-      <strong>Long Term Goal:</strong>
-      <%= @client_info.long_term_goal %>
-    </p>
-
-    <hr/>
-    <p>
-      <strong>Future Plan:</strong>
-    </p>
-
-    <p>
-      <strong>Child Education:</strong>
-      <%= @client_info.plan_child_education %>
-    </p>
-
-    <p>
-      <strong>Child Marriage:</strong>
-      <%= @client_info.plan_child_marriage %>
-    </p>
-
-    <p>
-      <strong>Retirement Fund:</strong>
-      <%= @client_info.plan_retirement_fund %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>Gold:</strong>
+          <%= @client_info.investment_type.gold %> %
+        </td>
+        <td>
+          <strong>Land & Estate:</strong>
+          <%= @client_info.investment_type.land_and_estate %> %
+        </td>
+      </tr>
+    </table>
 
     <hr/>
-    <p>
-      <br/><br/>
-      <strong>Children Detail:</strong><br/><br/>
-    </p>
+    <h3><p style="text-align: center;">
+      <strong>Personal Assets</strong><br/>
+    </p></h3>
+    <h4><p>
+      <strong>House</strong>
+    </p></h4>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Owned :</strong>
+          <%= @client_info.house.owned %>
+        </td>
+        <td>
+          <strong>Rented:</strong>
+          <%= @client_info.house.rented %>
+        </td>
+      </tr>
 
-    <p>
-      <strong>Number of child:</strong>
-      <%= @client_info.number_of_child %>
-    </p>
-    <% @client_info.child_infos.each do |child,index| %>
-        <p>
-          <strong>Child <%= index %> Age :</strong>
-          <%= child.age %>
-        </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>Co Provided:</strong>
+          <%= @client_info.house.co_provider %>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </table>
 
-        <p>
-          <strong>Child <%= index %> Date of Birth :</strong>
-          <%= child.date_of_birth %>
-        </p>
-    <% end %>
+    <h4><p>
+      <strong>Vehicle</strong>
+    </p></h4>
+    <table style="width: 1000px;">
+      <tr style="height: 40px;">
+        <td>
+          <strong>Four Wheeler :</strong>
+          <%= @client_info.vehicle.four_wheeler %>
+        </td>
+        <td>
+          <strong>Two Wheeler:</strong>
+          <%= @client_info.vehicle.two_wheeler %>
+        </td>
+      </tr>
 
-    <hr/>
-    <p>
-      <br/><br/>
-      <strong>Investment:</strong><br/><br/>
-    </p>
-
-
-    <p>
-      <strong>Fixed Income ( FD, POST, PPF):</strong>
-      <%= @client_info.investment_type.fix_income %> %
-    </p>
-
-    <p>
-      <strong>Equity( Direct, MF, SIP) :</strong>
-      <%= @client_info.investment_type.equity %> %
-    </p>
-
-    <p>
-      <strong>Gold:</strong>
-      <%= @client_info.investment_type.gold %> %
-    </p>
-
-    <p>
-      <strong>Land & Estate:</strong>
-      <%= @client_info.investment_type.land_and_estate %> %
-    </p>
-    <hr/>
-    <p>
-      <br/><br/>
-      <strong>Personal Assets:</strong>
-      <strong>House :</strong> <br/><br/>
-    </p>
-
-    <p>
-      <strong>Owned :</strong>
-      <%= @client_info.house.owned %>
-    </p>
-
-    <p>
-      <strong>Rented:</strong>
-      <%= @client_info.house.rented %>
-    </p>
-
-    <p>
-      <strong>Co Provided:</strong>
-      <%= @client_info.house.co_provider %>
-    </p>
-
-    <p>
-      <br/><br/>
-      <strong>Vehicle :</strong> <br/><br/>
-    </p>
-
-    <p>
-      <strong>Four Wheeler :</strong>
-      <%= @client_info.vehicle.four_wheeler %>
-    </p>
-
-    <p>
-      <strong>Two Wheeler:</strong>
-      <%= @client_info.vehicle.two_wheeler %>
-    </p>
-
-    <p>
-      <strong>No Vehical:</strong>
-      <%= @client_info.vehicle.none %>
-    </p>
+      <tr style="height: 40px;">
+        <td>
+          <strong>No Vehical:</strong>
+          <%= @client_info.vehicle.none %>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </table>
 
     <%= link_to 'Edit', edit_client_info_path(@client_info), :class => "btn" %> |
     <%= link_to 'Back', client_infos_path, :class => "btn" %>
