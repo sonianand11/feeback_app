@@ -1,11 +1,12 @@
 class ClientInfosController < ApplicationController
   before_action :set_client_info, only: [:show, :edit, :update, :destroy]
   require "prawn"
-
+  before_filter :authenticate_user!
   # GET /client_infos
   # GET /client_infos.json
   def index
     @client_infos = ClientInfo.all
+    @clientbirthdate = ClientInfo.where("MONTH(date_of_birth) = ? AND DAY(date_of_birth) = ?", Date.today.month, Date.today.day)
   end
 
   # GET /client_infos/1
@@ -104,7 +105,7 @@ class ClientInfosController < ApplicationController
     end
     respond_to do |format|
       format.html # index.html.erb
-      format.xlsx
+      format.xlsx #{ send_data filename: 'my_name.xls'}
     end
   end
 
@@ -178,20 +179,33 @@ class ClientInfosController < ApplicationController
         indent(30) do
           pad(5){text "<b>Number of Child: </b> #{client.number_of_child}", :inline_format => true }
           data = []
-          client.child_infos.each_with_index do |child,i|
-            if !child.date_of_birth.nil?
-              data << ["<b>Child #{i+1} Age:</b> #{child.age}","<b>Child #{i+1} Date of Birth:</b> #{child.date_of_birth.strftime("%F") rescue ""}"]
+          if !client.child_infos.nil?
+            client.child_infos.each_with_index do |child,i|
+              if !child.date_of_birth.nil?
+                data << ["<b>Child #{i+1} Age:</b> #{child.age}","<b>Child #{i+1} Date of Birth:</b> #{child.date_of_birth.strftime("%F") rescue ""}"]
+              else
+                data << ["<b>Child #{i+1} Age:</b> #{child.age}","<b>Child #{i+1} Date of Birth: </b>"]
+              end
+
+            end
+            if data.blank?
+              pad(5){text "<b>No Child Information</b>", :inline_format => true }
             else
-              data<< ["<b>Child #{i+1} Age:</b> #{child.age}","<b>Child #{i+1} Date of Birth: </b>"]
+              table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
             end
           end
-          table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
         end
         pad(10){text "<b>Personal Assets</b>", :size => 20,:inline_format => true  }
         indent(30) do
-          data = [["<b>House Owned:</b> #{client.house.owned}","<b>Four Wheeler:</b> #{client.vehicle.four_wheeler}"],
-                  ["<b>House Rented:</b> #{client.house.rented}","<b>Two Wheeler:</b> #{client.vehicle.two_wheeler}"],
-                  ["<b>House Co Provider:</b> #{client.house.co_provider}","<b>No Vehicle:</b> #{client.vehicle.none}"]]
+          if !client.house.nil?
+            data = [["<b>House Owned:</b> #{client.house.owned}","<b>Four Wheeler:</b> #{client.vehicle.four_wheeler}"],
+                    ["<b>House Rented:</b> #{client.house.rented}","<b>Two Wheeler:</b> #{client.vehicle.two_wheeler}"],
+                    ["<b>House Co Provider:</b> #{client.house.co_provider}","<b>No Vehicle:</b> #{client.vehicle.none}"]]
+          else
+            data = [["<b>House Owned:</b> ","<b>Four Wheeler:</b> "],
+                    ["<b>House Rented:</b> ","<b>Two Wheeler:</b> "],
+                    ["<b>House Co Provider:</b>","<b>No Vehicle:</b>"]]
+          end
           table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
         end
         pad(10){text "<b>Future Goal</b>", :size => 20,:inline_format => true }
@@ -207,8 +221,13 @@ class ClientInfosController < ApplicationController
         end
         pad(10){text "<b>Investment</b>", :size => 20,:inline_format => true }
         indent(30) do
-          data = [["<b>Fix Income:</b> #{client.investment_type.fix_income}%","<b>Equity:</b> #{client.investment_type.equity}%"],
+          if !client.investment_type.nil?
+            data = [["<b>Fix Income:</b> #{client.investment_type.fix_income}%","<b>Equity:</b> #{client.investment_type.equity}%"],
                   ["<b>Gold:</b> #{client.investment_type.gold}%","<b>Land and Estate:</b> #{client.investment_type.land_and_estate}%"]]
+          else
+            data = [["<b>Fix Income:</b> 0%","<b>Equity:</b> 0%"],
+                    ["<b>Gold:</b> 0%","<b>Land and Estate:</b> 0%"]]
+          end
           table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
         end
         if client_info.length != 1

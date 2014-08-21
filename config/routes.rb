@@ -1,4 +1,5 @@
 Feedback::Application.routes.draw do
+  devise_for :users
   root 'client_infos#index'
   resources :client_infos
 

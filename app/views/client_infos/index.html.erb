@@ -37,3 +37,68 @@
 <%= link_to 'New Client info', new_client_info_path, class: "btn"  %>
 <%= link_to "Download Excel", download_xlsx_path(format: "xlsx") , class: "btn"%>
 <%= link_to "Download Pdf", download_pdf_path(format: "pdf") ,class: "btn"%>
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg modal-btn" data-toggle="modal" data-target="#myModal" style="display: none;">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Today's Client Birthday</h4>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr>
+            <th style="width: 200px; text-align: center;">Name</th>
+            <th style="width: 200px; text-align: center;">Mobile</th>
+          </tr>
+          <% @clientbirthdate.each do |client| %>
+            <tr>
+              <td style="width: 200px; text-align: center;"><%= client.name %></td>
+              <td style="width: 200px; text-align: center;"><%= client.mobile %></td>
+            </tr>
+        <% end %>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close Reminder</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title btn">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Today's Client Birthday
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table>
+          <tr>
+            <th style="width: 200px; text-align: center;">Name</th>
+            <th style="width: 200px; text-align: center;">Mobile</th>
+          </tr>
+          <% @clientbirthdate.each do |client| %>
+              <tr>
+                <td style="width: 200px; text-align: center;"><%= client.name %></td>
+                <td style="width: 200px; text-align: center;"><%= client.mobile %></td>
+              </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+   <% if user_signed_in? %>
+        $(".modal-btn").click()
+   <% end %>
+</script>
