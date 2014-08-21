@@ -56,12 +56,14 @@
             <th style="width: 200px; text-align: center;">Name</th>
             <th style="width: 200px; text-align: center;">Mobile</th>
           </tr>
-          <% @clientbirthdate.each do |client| %>
-            <tr>
-              <td style="width: 200px; text-align: center;"><%= client.name %></td>
-              <td style="width: 200px; text-align: center;"><%= client.mobile %></td>
-            </tr>
-        <% end %>
+          <% if session[:reminder].present? %>
+              <% session[:reminder].each do |client| %>
+                  <tr>
+                    <td style="width: 200px; text-align: center;"><%= client.name %></td>
+                    <td style="width: 200px; text-align: center;"><%= client.mobile %></td>
+                  </tr>
+              <% end %>
+          <% end %>
         </table>
       </div>
       <div class="modal-footer">
@@ -98,7 +100,8 @@
   </div>
 </div>
 <script>
-   <% if user_signed_in? %>
+   <% if user_signed_in? and !session[:reminder].blank? %>
         $(".modal-btn").click()
+        <% session.delete(:reminder) %>
    <% end %>
 </script>
