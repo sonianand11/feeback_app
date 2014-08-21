@@ -43,6 +43,7 @@
         <Cell><Data ss:Type="String">Short Term Goal</Data></Cell>
         <Cell><Data ss:Type="String">Long Term Goal</Data></Cell>
         <Cell><Data ss:Type="String">Retirement age</Data></Cell>
+        <Cell><Data ss:Type="String">Years intend to work</Data></Cell>
         <Cell><Data ss:Type="String">Child Education</Data></Cell>
         <Cell><Data ss:Type="String">Child Marriage</Data></Cell>
         <Cell><Data ss:Type="String">Retirement Pension</Data></Cell>
@@ -83,10 +84,18 @@
                     <Cell><Data ss:Type="Date"></Data></Cell>
                 <% end %>
             <% end %>
+            <% if client_info.child_infos.length != 4 %>
+                <% l = 4 - client_info.child_infos.length - 1 %>
+                <% l.downto(0) do |i| %>
+                  <Cell><Data ss:Type="Number"></Data></Cell>
+                  <Cell><Data ss:Type="Date"></Data></Cell>
+                <% end %>
+            <% end %>
             <Cell><Data ss:Type="Date"><%= client_info.anniversary_date.strftime("%F") rescue ""%></Data></Cell>
             <Cell><Data ss:Type="String"><%= client_info.short_term_goal %></Data></Cell>
             <Cell><Data ss:Type="String"><%= client_info.long_term_goal %></Data></Cell>
             <Cell><Data ss:Type="Number"><%= client_info.retirement_age %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= client_info.intend_to_work %></Data></Cell>
             <Cell><Data ss:Type="String"><%= client_info.plan_child_education %></Data></Cell>
             <Cell><Data ss:Type="String"><%= client_info.plan_child_marriage %></Data></Cell>
             <Cell><Data ss:Type="String"><%= client_info.plan_retirement_fund %></Data></Cell>

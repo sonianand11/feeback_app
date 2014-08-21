@@ -67,7 +67,7 @@
     Job experiance Field : <%= f.number_field :job_expirience_year,:value => 1, :style => "margin-left: 189px;" %>
   </div>
   <div class="field">
-    Income<%= f.text_field :income,:value => 100000, :style => "margin-left: 286px;" %>
+    Income<%= f.text_field :income,:value => (@client_info.present? ? @client_info.income : 1000000), :style => "margin-left: 286px;" %>
   </div>
   <div class="field">
     Economical Liability<%= f.text_field :economical_liability, :style => "margin-left: 210px;" %>
@@ -75,31 +75,31 @@
   <hr>
   <b><h4>Child/Children Detail :</h4></b><br>
   <div class="field">
-    Number of Child<%= f.number_field :number_of_child,:value => 0, :style => "margin-left: 231px;" %>
+    Number of Child<%= f.number_field :number_of_child,:value => (@client_info.present? ? @client_info.number_of_child : 0), :style => "margin-left: 231px;" %>
   </div>
  <div class="field">
-	Child Age :(1) <input type="number" value="0" name="child_info[age[1]]" style="margin-left: 244px;"><br>
+	Child Age :(1) <input type="number" value="<%= @child.present? && @child.first.present? ? @child.first.age : 0 %>" name="child_info[age[1]]" style="margin-left: 244px;"><br>
  </div>
  <div class="field">
-	Child Age :(2) <input type="number" value="0"  name="child_info[age[2]]" style="margin-left: 244px;"><br>
+	Child Age :(2) <input type="number" value="<%= @child.present? && @child.second.present? ? @child.second.age : 0 %>"  name="child_info[age[2]]" style="margin-left: 244px;"><br>
  </div>
    <div class="field">
-     Child Age :(3) <input type="number" value="0"  name="child_info[age[3]]" style="margin-left: 244px;"><br>
+     Child Age :(3) <input type="number" value="<%= @child.present? && @child.third.present? ? @child.third.age : 0 %>"  name="child_info[age[3]]" style="margin-left: 244px;"><br>
    </div>
    <div class="field">
-     Child Age :(4) <input type="number" value="0"  name="child_info[age[4]]" style="margin-left: 244px;"><br>
+     Child Age :(4) <input type="number" value="<%= @child.present? && @child.fourth.present? ? @child.fourth.age : 0 %>"  name="child_info[age[4]]" style="margin-left: 244px;"><br>
    </div>
    <div class="field">
-     Child Date of Birth :(1) <input type="text" name="child_info[dob[1]]" id="child1DatePicker" style="margin-left: 191px;"><br>
+     Child Date of Birth :(1) <input type="text" name="child_info[dob[1]]" id="child1DatePicker" value="<%= @child.present? && @child.first.present? ? @child.first.date_of_birth : "" %>" style="margin-left: 191px;"><br>
    </div>
    <div class="field">
-     Child Date of Birth :(2) <input type="text" name="child_info[dob[2]]" id="child2DatePicker" style="margin-left: 191px;"><br>
+     Child Date of Birth :(2) <input type="text" name="child_info[dob[2]]" id="child2DatePicker" value="<%= @child.present? && @child.second.present? ? @child.second.date_of_birth : "" %>"  style="margin-left: 191px;"><br>
    </div>
    <div class="field">
-   Child Date of Birth :(3) <input type="text" name="child_info[dob[3]]" id="child3DatePicker" style="margin-left: 191px;"><br>
+   Child Date of Birth :(3) <input type="text" name="child_info[dob[3]]" id="child3DatePicker" value="<%= @child.present? && @child.third.present? ? @child.third.date_of_birth : "" %>"  style="margin-left: 191px;"><br>
    </div>
    <div class="field">
-   Child Date of Birth :(4) <input type="text" name="child_info[dob[4]]" id="child4DatePicker" style="margin-left: 191px;"><br>
+   Child Date of Birth :(4) <input type="text" name="child_info[dob[4]]" id="child4DatePicker" value="<%= @child.present? && @child.fourth.present? ? @child.fourth.date_of_birth : "" %>"  style="margin-left: 191px;"><br>
    </div>
    <br>
 
@@ -111,13 +111,13 @@
    </div>
   <div style="margin-top: -50px;">
     <div class="field">
-      <input type="number" value="0"  name="house[owned]" style="margin-left: 335px;"> Owned
+      <input type="number" value="<%= @house.present? ? @house.owned : 0 %>"  name="house[owned]" style="margin-left: 335px;"> Owned
     </div>
     <div class="field">
-      <input type="number" value="0"  name="house[rented]" style="margin-left: 335px;"> Rented
+      <input type="number" value="<%= @house.present? ? @house.rented : 0 %>"  name="house[rented]" style="margin-left: 335px;"> Rented
     </div>
     <div class="field">
-      <input type="number" value="0"  name="house[co_provider]" style="margin-left: 335px;"> Co Provided<br>
+      <input type="number" value="<%= @house.present? ? @house.co_provider : 0 %>"  name="house[co_provider]" style="margin-left: 335px;"> Co Provided<br>
     </div>
   </div>
   <div class="field">
@@ -126,13 +126,13 @@
   <div  style="margin-top: -35px;" >
     <div class="field">
 
-      <input type="number"  value="0" name="vehicle[four_wheeler]" style="margin-left: 335px;"> 4 Wheeler
+      <input type="number"  value="<%= @vehicle.present? ? @vehicle.four_wheeler : 0 %>" name="vehicle[four_wheeler]" style="margin-left: 335px;"> 4 Wheeler
     </div>
     <div class="field">
-      <input type="number"  value="0" name="vehicle[two_wheeler]" style="margin-left: 335px;"> 2 Wheeler
+      <input type="number"  value="<%= @vehicle.present? ? @vehicle.two_wheeler : 0 %>" name="vehicle[two_wheeler]" style="margin-left: 335px;"> 2 Wheeler
     </div>
     <div class="field">
-      <input type="number"  value="0" name="vehicle[none]" style="margin-left: 335px;"> None<br>
+      <input type="number"  value="<%= @vehicle.present? ? @vehicle.none : 0 %>" name="vehicle[none]" style="margin-left: 335px;"> None<br>
     </div>
   </div>
 
@@ -142,41 +142,57 @@
      How Many More Years Do You Intend To Work ?
    <!--</div>-->
    <!--<div class="field">-->
-   <input type="radio" name="client_info[intend_to_work]" value="<5" style="margin-left: 25px;" checked="checked">< 5 Year
+   <% if @client_info.present? && @client_info.intend_to_work == "<5" %>
+    <input type="radio" name="client_info[intend_to_work]" value="<5" style="margin-left: 25px;" checked="checked">< 5 Year
+   <% else %>
+    <input type="radio" name="client_info[intend_to_work]" value="<5" style="margin-left: 25px;">< 5 Year
+   <% end %>
 <br>	</div>
    <div class="field">
-     <input type="radio" name="client_info[intend_to_work]" value="5-10" style="margin-left: 339px;">5 To 10 Year<br>
+     <% if @client_info.present? && @client_info.intend_to_work == "5-10" %>
+       <input type="radio" name="client_info[intend_to_work]" value="5-10" style="margin-left: 339px;"  checked="checked">5 To 10 Year<br>
+     <% else %>
+       <input type="radio" name="client_info[intend_to_work]" value="5-10" style="margin-left: 339px;">5 To 10 Year<br>
+     <% end %>
    </div>
    <div class="field">
-     <input type="radio" name="client_info[intend_to_work]" value="11-15" style="margin-left: 339px;">11 To 15 Year<br>
+     <% if @client_info.present? && @client_info.intend_to_work == "11-15" %>
+        <input type="radio" name="client_info[intend_to_work]" value="11-15" style="margin-left: 339px;" checked="checked">11 To 15 Year<br>
+     <% else %>
+       <input type="radio" name="client_info[intend_to_work]" value="11-15" style="margin-left: 339px;">11 To 15 Year<br>
+     <% end %>
    </div>
    <div class="field">
-     <input type="radio" name="client_info[intend_to_work]" value=">15" style="margin-left: 339px;">15 Year & More<br>
-	</div><br>
+     <% if @client_info.present? && @client_info.intend_to_work == ">15" %>
+        <input type="radio" name="client_info[intend_to_work]" value=">15" style="margin-left: 339px;" checked="checked">15 Year & More<br>
+     <% else %>
+        <input type="radio" name="client_info[intend_to_work]" value=">15" style="margin-left: 339px;">15 Year & More<br>
+     <% end %>
+   </div><br>
 	<div class="field">
    What is the duration of your goals? <br>
       </div><div class="field">
-	Short term : <input type="text" name="client_info[short_term_goal]" style="margin-left: 258px;"> ( Vacation, Dream Car etc.)<br>
+	Short term : <input type="text" value="<%= @client_info.present? ? @client_info.short_term_goal : 0 %>" name="client_info[short_term_goal]" style="margin-left: 258px;"> ( Vacation, Dream Car etc.)<br>
    </div>
    <div class="field">
-     Long term : <input type="text" name="client_info[long_term_goal]" style="margin-left: 258px;"> ( Child eduction, Child Marriage & Retirement)<br>
+     Long term : <input type="text" value="<%= @client_info.present? ? @client_info.long_term_goal : 0 %>" name="client_info[long_term_goal]" style="margin-left: 258px;"> ( Child eduction, Child Marriage & Retirement)<br>
 	<br>
    </div>
    <div class="field">
-     What Age would you wish to Retire ?  <input type="text" name="client_info[retirement_age]" style="margin-left: 100px;"> <br>
+     What Age would you wish to Retire ?  <input type="text"  value="<%= @client_info.present? ? @client_info.retirement_age : 0 %>" name="client_info[retirement_age]" style="margin-left: 100px;"> <br>
    </div>
    <div class="field">
 
    Have you planned for your:-<br>
    </div>
    <div class="field">
-     1) Child Education <input type="text" name="client_info[plan_child_education]" style="margin-left: 216px;"> <br>
+     1) Child Education <input type="text" value="<%= @client_info.present? ? @client_info.plan_child_education : 0 %>" name="client_info[plan_child_education]" style="margin-left: 216px;"> <br>
    </div>
    <div class="field">
-   2) Child Marriage <input type="text" name="client_info[plan_child_marriage]" style="margin-left: 222px;"> <br>
+   2) Child Marriage <input type="text" value="<%= @client_info.present? ? @client_info.plan_child_marriage : 0 %>" name="client_info[plan_child_marriage]" style="margin-left: 222px;"> <br>
    </div>
    <div class="field">
-     3) Retirement fund <input type="text" name="client_info[plan_retirement_fund]" style="margin-left: 213px;"> <br>
+     3) Retirement fund <input type="text" value="<%= @client_info.present? ? @client_info.plan_retirement_fund : 0 %>" name="client_info[plan_retirement_fund]" style="margin-left: 213px;"> <br>
    </div>
    <div class="field">
      (keeping inflation in consideration).
@@ -190,16 +206,16 @@
   </div>
   <div class="field">
 
-  1) Fixed Income ( FD, POST, PPF) <input type="text"  value="0" name="investment_type[fix_income]" style="margin-left: 110px;">%<br>
+  1) Fixed Income ( FD, POST, PPF) <input type="text"  value="<%= @investment_type.present? ? @investment_type.fix_income : 0 %>" name="investment_type[fix_income]" style="margin-left: 110px;">%<br>
    </div>
    <div class="field">
-     2) Equity( Direct, MF, SIP) <input type="text"  value="0" name="investment_type[equity]" style="margin-left: 166px;">%<br>
+     2) Equity( Direct, MF, SIP) <input type="text"  value="<%= @investment_type.present? ? @investment_type.equity : 0 %>" name="investment_type[equity]" style="margin-left: 166px;">%<br>
    </div>
    <div class="field">
-     3) Gold <input type="text" name="investment_type[gold]"  value="0" style="margin-left: 285px">%<br>
+     3) Gold <input type="text" name="investment_type[gold]"  value="<%= @investment_type.present? ? @investment_type.gold : 0 %>" style="margin-left: 285px">%<br>
    </div>
    <div class="field">
-     4) Land & Estate <input type="text" name="investment_type[land_and_estate]"  value="0" style="margin-left: 226px;">%<br>
+     4) Land & Estate <input type="text" name="investment_type[land_and_estate]"  value="<%= @investment_type.present? ? @investment_type.land_and_estate : 0 %>" style="margin-left: 226px;">%<br>
 <br>
    </div>
    <div class="field">

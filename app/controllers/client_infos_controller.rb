@@ -21,6 +21,11 @@ class ClientInfosController < ApplicationController
 
   # GET /client_infos/1/edit
   def edit
+    @client_info = ClientInfo.find(params[:id])
+    @child = @client_info.child_infos
+    @house = @client_info.house
+    @vehicle = @client_info.vehicle
+    @investment_type = @client_info.investment_type
   end
 
   # POST /client_infos
@@ -105,7 +110,7 @@ class ClientInfosController < ApplicationController
       @client_infos = ClientInfo.all
       @file_name = "all client info - #{Time.now}"
     end
-    headers["Content-Disposition"] = "attachment; filename=\"#{@file_name}\""
+    headers["Content-Disposition"] = "attachment; filename=\"#{@file_name}.xlsx\""
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx #{ send_data filename: 'my_name.xls'}
@@ -142,7 +147,7 @@ class ClientInfosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_info_params
-      params.require(:client_info).permit(:name, :address, :pincode, :date_of_birth, :mobile, :phone, :email, :education, :occupation, :job_post, :name_of_company, :job_expirience_year, :income, :economical_liability, :number_of_child, :anniversary_date,  :short_term_goal, :long_term_goal, :retirement_age, :plan_child_education, :plan_child_marriage, :plan_retirement_fund)
+      params.require(:client_info).permit(:name, :address, :pincode, :date_of_birth, :mobile, :phone, :email, :education, :occupation, :job_post, :name_of_company, :job_expirience_year, :income, :economical_liability, :number_of_child, :anniversary_date,  :short_term_goal, :long_term_goal, :retirement_age, :plan_child_education, :plan_child_marriage, :plan_retirement_fund,:intend_to_work)
     end
   private
 
@@ -175,7 +180,8 @@ class ClientInfosController < ApplicationController
           data = [["<b>Education:</b> #{client.education}","<b>Occupation:</b> #{client.occupation}"],
                   ["<b>Name Of Company:</b> #{client.name_of_company}","<b>Job Post:</b> #{client.job_post}"],
                   ["<b>Job Experience:</b> #{client.job_expirience_year}","<b>Income:</b> #{client.income}"],
-                  ["<b>Economical Liability:</b> #{client.economical_liability}","<b>Retirement Age:</b> #{client.retirement_age}"]]
+                  ["<b>Economical Liability:</b> #{client.economical_liability}","<b>Retirement Age:</b> #{client.retirement_age}"],
+                  ["<b>How many years intend to work:</b> #{client.intend_to_work}",""]]
           table data, :cell_style => { :inline_format => true,:borders => [], :width => 250 }
         end
         pad(10){text "<b>Child Details</b>", :size => 20,:inline_format => true }
