@@ -100,9 +100,12 @@ class ClientInfosController < ApplicationController
     if params[:id].present?
       @client_infos = []
       @client_infos << ClientInfo.find(params[:id])
+      @file_name = "#{@client_infos.first.name} - #{Time.now}"
     else
       @client_infos = ClientInfo.all
+      @file_name = "all client info - #{Time.now}"
     end
+    headers["Content-Disposition"] = "attachment; filename=\"#{@file_name}\""
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx #{ send_data filename: 'my_name.xls'}
