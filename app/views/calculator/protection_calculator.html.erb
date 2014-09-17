@@ -4,7 +4,7 @@
 <%= text_field_tag 'current_monthly_expenses', "Enter Current Monthly Expenses" %>
 
 <%= label_tag 'Current Annual Expenses' %>
-<%= text_field_tag 'current_annual_expenses', "Enter Current Annual Expenses" %>
+<%= text_field_tag 'current_annual_expenses', nil,disabled: true  %>
 
 <%= label_tag 'Current Liability' %>
 <%= text_field_tag 'current_liability', "Enter Current Liability" %>
@@ -17,15 +17,37 @@
 
 <%= label_tag 'Enter Growth Rate' %>
 <%= text_field_tag 'growth_rate', "Enter Growth rate" %>
-
-<%= label_tag 'Capital Required to Maintain Lifestyle' %>
-<%= text_field_tag 'future_monthly_amount' %>
-
-<%= label_tag 'Recommended Life Cover' %>
-<%= text_field_tag 'recommended_life_cover' %>
-
-<%= label_tag 'Monthly Primium' %>
-<%= text_field_tag 'monthly_premium' %>
 <br/>
 <br/>
 <%= button_tag "Calculate", :class => "btn"  %>
+<br/>
+
+<h3>Protection Calculation for future and monthly premium: </h3>
+<br/>
+<br/>
+
+<%= label_tag 'Capital Required to Maintain Lifestyle' %>
+<%= text_field_tag 'future_monthly_amount',nil,disabled: true %>
+
+<%= label_tag 'Recommended Life Cover' %>
+<%= text_field_tag 'recommended_life_cover',nil,disabled: true %>
+
+<%#= label_tag 'Monthly Primium' %>
+<%#= text_field_tag 'monthly_premium',nil,disabled: true %>
+
+<script>
+    $("#current_monthly_expenses").focusout(function(e){
+        var current_monthly_expenses = parseInt($("#current_monthly_expenses").val());
+        var current_annual_expenses = parseInt($("#current_annual_expenses").val(current_monthly_expenses*12));
+    });
+
+    $(".btn").click(function(e){
+        var current_monthly_expenses = parseInt($("#current_monthly_expenses").val());
+        var current_annual_expenses = parseInt($("#current_annual_expenses").val());
+        var current_liability = parseInt($("#current_liability").val());
+        var assumed_risk_rate = parseInt($("#assumed_risk_rate").val());
+        var future_monthly_amount = Math.round((current_annual_expenses *100 )/assumed_risk_rate);
+        $("#future_monthly_amount").val(future_monthly_amount);
+        $("#recommended_life_cover").val(current_liability + future_monthly_amount);
+    });
+</script>

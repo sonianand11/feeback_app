@@ -8,7 +8,6 @@ Feedback::Application.routes.draw do
 
   get "/calculator" => "calculator#index"
   get "/child_education_calculator" => "calculator#child_education_calculator"
-  get "/health_calculator" => "calculator#health_calculator"
   get "/retirment_calculator" => "calculator#retirment_calculator"
   get "/wealth_calculator" => "calculator#wealth_calculator"
   get "/protection_calculator" => "calculator#protection_calculator"

@@ -1,10 +1,13 @@
 <h3>Wealth Calculator</h3>
 
 <%= label_tag 'Curent Age' %>
-<%= text_field_tag 'current_age', "Enter Current Age" %>
+<%= text_field_tag 'current_age', "Enter Current Age",:class => "retirment_age" %>
 
 <%= label_tag 'Years to Retirment' %>
-<%= text_field_tag 'remaining_years', "Enter Years to Retire" %>
+<%= text_field_tag 'years_to_retire', "Enter Years to Retire",:class => "retirment_age"  %>
+
+<%= label_tag 'Years remaining for Retirement' %>
+<%= text_field_tag 'years_remaining_for_retirement',nil,disabled: true %>
 
 <%= label_tag 'Current cost of goal' %>
 <%= text_field_tag 'current_cost_of_goal', "Enter Current cost of goal" %>
@@ -14,12 +17,61 @@
 
 <%= label_tag 'Enter Growth Rate' %>
 <%= text_field_tag 'growth_rate', "Enter Growth rate" %>
+<br/>
+<br/>
+<%= button_tag "Calculate", :class => "btn"  %>
+<br/>
+
+<h3>Wealth Calculation in future and monthly premium: </h3>
+<br/>
+<br/>
 
 <%= label_tag 'Future Cost' %>
-<%= text_field_tag 'future_cost' %>
+<%= text_field_tag 'future_cost',nil,disabled: true %>
 
 <%= label_tag 'Monthly Primium' %>
-<%= text_field_tag 'monthly_premium' %>
-<br/>
-<br/>
-<%= button_tag "Calculate", :class => "btn" %>
+<%= text_field_tag 'monthly_premium',nil,disabled: true %>
+
+
+
+
+<script>
+
+    $(".retirment_age").focusout(function(e){
+        var current_age = parseInt($("#current_age").val());
+        var years_to_retire = parseInt($("#years_to_retire").val());
+        var years_remaining_for_retirement = years_to_retire-current_age;
+        if( !isNaN(years_remaining_for_retirement) && years_remaining_for_retirement > 0)
+        {
+            $("#years_remaining_for_retirement").val(years_remaining_for_retirement);
+        }
+        if(isNaN(current_age) || isNaN(years_to_retire))
+        {
+            $("#years_remaining_for_retirement").val("");
+        }
+        if(years_remaining_for_retirement<=0)
+        {
+            $("#years_remaining_for_retirement").val("");
+            alert("Your current Age is less than Age At Retirment. Please mention it corrctly")
+        }
+    });
+
+    $(".btn").click(function(e){
+        var current_age = parseInt($("#current_age").val());
+        var years_to_retire = parseInt($("#years_to_retire").val());
+        var inflation_rate = parseInt($("#inflation_rate").val());
+        var growth_rate = parseInt($("#growth_rate").val());
+        var current_cost_of_goal = parseInt($("#current_cost_of_goal").val());
+        var age = years_to_retire-current_age;
+        var future_cost;
+        var inflations = 1
+        for(i=0;i<age;i++)
+        {
+            inflations = inflations * (1 + (inflation_rate/100));
+        }
+        future_cost = current_cost_of_goal * inflations
+        $("#future_cost").val(Math.round(future_cost));
+        premium = future_cost * (inflation_rate/100) / (inflations-1)
+        $("#monthly_premium").val(Math.round(premium/12))
+    });
+</script>

@@ -1,10 +1,13 @@
 <h3>Child Education Calculator</h3>
 
 <%= label_tag 'Child Age' %>
-<%= text_field_tag 'child_age', "Enter Child Age" %>
+<%= text_field_tag 'child_age', "Enter Child Age", :class => "child_age" %>
+
+<%= label_tag 'Age of Child Education' %>
+<%= text_field_tag 'age_at_education', "Enter Age of for Child Education", :class => "child_age" %>
 
 <%= label_tag 'Years remaining for Child Education' %>
-<%= text_field_tag 'remaining_years', "Enter Remaining Years for Child Education" %>
+<%= text_field_tag 'years_remaining_for_education',nil,disabled: true %>
 
 <%= label_tag 'Inflation Rate' %>
 <%= text_field_tag 'inflation_rate', "Enter Inflation Rate" %>
@@ -14,26 +17,53 @@
 
 <%= label_tag 'Present Amount' %>
 <%= text_field_tag 'present_amount', "Enter Present Amount for Education" %>
-
-<%= label_tag 'Future Amount' %>
-<%= text_field_tag 'future_amount' %>
-
-<%= label_tag 'Monthly Premium' %>
-<%= text_field_tag 'monthly_premium' %>
 <br/>
 <br/>
 <%= button_tag "Calculate", :class => "btn"  %>
+<br/>
+<br/>
+<br/>
+
+<h3>Child Education Calculation in future and monthly premium: </h3>
+<br/>
+<br/>
+
+<%= label_tag 'Future Amount'%>
+<%= text_field_tag 'future_amount',nil,disabled: true %>
+
+<%= label_tag 'Monthly Premium' %>
+<%= text_field_tag 'monthly_premium',nil,disabled: true %>
+
 
 
 <script>
 
+    $(".child_age").focusout(function(e){
+        var child_age = parseInt($("#child_age").val());
+        var age_at_education = parseInt($("#age_at_education").val());
+        var years_remaining_for_eduaction = age_at_education-child_age;
+        if( !isNaN(years_remaining_for_eduaction) && years_remaining_for_eduaction > 0)
+        {
+            $("#years_remaining_for_education").val(years_remaining_for_eduaction);
+        }
+        if(isNaN(child_age) || isNaN(age_at_education))
+        {
+            $("#years_remaining_for_education").val("");
+        }
+        if(years_remaining_for_eduaction<=0)
+        {
+            $("#years_remaining_for_education").val("");
+            alert("Your current Age is less than Age At Education. Please mention it corrctly")
+        }
+    });
+
   $(".btn").click(function(e){
      var child_age = parseInt($("#child_age").val());
-     var remaining_year = parseInt($("#remaining_years").val());
+     var age_at_education = parseInt($("#age_at_education").val());
      var inflation_rate = parseInt($("#inflation_rate").val());
      var growth_rate = parseInt($("#growth_rate").val());
      var present_amount = parseInt($("#present_amount").val());
-     var age = remaining_year-child_age;
+     var age = age_at_education-child_age;
      var future_cost;
      var inflations = 1
      for(i=0;i<age;i++)
