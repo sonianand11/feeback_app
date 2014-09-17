@@ -164,10 +164,10 @@ class ClientInfosController < ApplicationController
         if client_info.length != 1
           pad(10) { text "\n Client #{index+1} Feedback Information", align: :center, :size => 32 }
         else
-          pad(10) { text "\n Client #{client.name} Feedback Information", align: :center, :size => 32 }
+          pad(10) { text "\n #{client.name}'s Feedback Information", align: :center, :size => 32 }
         end
         stroke_horizontal_rule
-        pad(10) { text "<b>Client Infirmation : </b>", :size => 20,:inline_format => true  }
+        pad(10) { text "<b>Personal Infirmation : </b>", :size => 20,:inline_format => true  }
         indent(30) do
           data = [[ "<b>Name:</b> #{client.name}","<b>Mobile:</b> #{client.mobile}"],
                 ["<b>Address:</b> #{client.address}","<b>Phone:</b> #{client.phone}"],
@@ -204,6 +204,7 @@ class ClientInfosController < ApplicationController
             end
           end
         end
+        start_new_page
         pad(10){text "<b>Personal Assets</b>", :size => 20,:inline_format => true  }
         indent(30) do
           if !client.house.nil?
