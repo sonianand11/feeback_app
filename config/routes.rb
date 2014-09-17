@@ -6,6 +6,13 @@ Feedback::Application.routes.draw do
   get "/download_xlsx" => "client_infos#download_xlsx"
   get "/download_pdf" => "client_infos#download_pdf"
 
+  get "/calculator" => "calculator#index"
+  get "/child_education_calculator" => "calculator#child_education_calculator"
+  get "/health_calculator" => "calculator#health_calculator"
+  get "/retirment_calculator" => "calculator#retirment_calculator"
+  get "/wealth_calculator" => "calculator#wealth_calculator"
+  get "/protection_calculator" => "calculator#protection_calculator"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

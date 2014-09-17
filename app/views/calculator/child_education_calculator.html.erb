@@ -1,0 +1,49 @@
+<h3>Child Education Calculator</h3>
+
+<%= label_tag 'Child Age' %>
+<%= text_field_tag 'child_age', "Enter Child Age" %>
+
+<%= label_tag 'Years remaining for Child Education' %>
+<%= text_field_tag 'remaining_years', "Enter Remaining Years for Child Education" %>
+
+<%= label_tag 'Inflation Rate' %>
+<%= text_field_tag 'inflation_rate', "Enter Inflation Rate" %>
+
+<%= label_tag 'Enter Growth Rate' %>
+<%= text_field_tag 'growth_rate', "Enter Growth rate" %>
+
+<%= label_tag 'Present Amount' %>
+<%= text_field_tag 'present_amount', "Enter Present Amount for Education" %>
+
+<%= label_tag 'Future Amount' %>
+<%= text_field_tag 'future_amount' %>
+
+<%= label_tag 'Monthly Primium' %>
+<%= text_field_tag 'monthly_premium' %>
+<br/>
+<br/>
+<%= button_tag "Calculate", :class => "btn"  %>
+
+
+<script>
+
+  $(".btn").click(function(e){
+     var child_age = parseInt($("#child_age").val());
+     var remaining_year = parseInt($("#remaining_years").val());
+     var inflation_rate = parseInt($("#inflation_rate").val());
+     var growth_rate = parseInt($("#growth_rate").val());
+     var present_amount = parseInt($("#present_amount").val());
+     var age = remaining_year-child_age;
+     var future_cost;
+     var inflations = 1
+     for(i=0;i<age;i++)
+      {
+          inflations = inflations * (1 + (inflation_rate/100));
+      }
+      future_cost = present_amount * inflations
+      console.log(Math.round(future_cost));
+      $("#future_amount").val(Math.round(future_cost));
+  });
+</script>
+
+
