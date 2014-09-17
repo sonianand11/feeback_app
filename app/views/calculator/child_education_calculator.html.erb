@@ -18,7 +18,7 @@
 <%= label_tag 'Future Amount' %>
 <%= text_field_tag 'future_amount' %>
 
-<%= label_tag 'Monthly Primium' %>
+<%= label_tag 'Monthly Premium' %>
 <%= text_field_tag 'monthly_premium' %>
 <br/>
 <br/>
@@ -41,8 +41,9 @@
           inflations = inflations * (1 + (inflation_rate/100));
       }
       future_cost = present_amount * inflations
-      console.log(Math.round(future_cost));
       $("#future_amount").val(Math.round(future_cost));
+      premium = future_cost * (inflation_rate/100) / (inflations-1)
+      $("#monthly_premium").val(Math.round(premium/12))
   });
 </script>
 

@@ -7,7 +7,7 @@
 <% if user_signed_in? %>
   <ul class="nav nav-pills nav-justified" style="margin-left: 150px;">
         <li style="margin-right: 20px;"><a href="<%= root_url %>"><h4>Home</h4></a></li>
-    <li><a href="#"><h4>Calculator</h4></a></li>
+    <li><a href="<%= calculator_path%>"><h4>Calculator</h4></a></li>
     <%= link_to('Logout', destroy_user_session_path, :method => :delete , :style => "margin-left: 90%;") %>
   </ul>
 <% end %>
