@@ -42,7 +42,13 @@ gem "rspec-rails", :group => [:development, :test]
 gem "cucumber-rails",:group => :test, :require => false
 gem "factory_girl_rails", :group => [:development, :test]
 
+gem 'capybara', :group => [:development, :test]
+
+
 gem 'rails_12factor', group: :production
+
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -6,7 +6,7 @@ class ClientInfosController < ApplicationController
   # GET /client_infos.json
   def index
     @client_infos = ClientInfo.all
-    @clientbirthdate = ClientInfo.where("MONTH(date_of_birth) = ? AND DAY(date_of_birth) = ?", Date.today.month, Date.today.day)
+    @clientbirthdate = ClientInfo.select{|client| client.date_of_birth.month == Date.today.month and client.date_of_birth.day == Date.today.day if !client.date_of_birth.nil?}
   end
 
   # GET /client_infos/1
