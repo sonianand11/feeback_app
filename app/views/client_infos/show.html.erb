@@ -173,53 +173,60 @@
         <td>
         </td>
       </tr>
-      <% @client_info.child_infos.each do |child,index| %>
+      <% unless @client_info.child_infos.nil?%>
+          <% @client_info.child_infos.each do |child,index| %>
 
-        <tr style="height: 40px;">
-          <td>
-            <strong>Child <%= index %> Age :</strong>
-            <%= child.age %>
-          </td>
-          <td>
-            <strong>Child <%= index %> Date of Birth :</strong>
-            <%= child.date_of_birth %>
-          </td>
-         </tr>
+            <tr style="height: 40px;">
+              <td>
+                <strong>Child <%= index %> Age :</strong>
+                <%= child.age %>
+              </td>
+              <td>
+                <strong>Child <%= index %> Date of Birth :</strong>
+                <%= child.date_of_birth %>
+              </td>
+             </tr>
+          <% end %>
       <% end %>
     </table>
+    <% unless @client_info.investment_type.nil? %>
+        <hr/>
+        <h3><p style="text-align: center;">
+          <strong>Investment</strong><br/><br/>
+        </p></h3>
+        <table style="width: 1000px;">
+          <tr style="height: 40px;">
+            <td>
+              <strong>Fixed Income ( FD, POST, PPF):</strong>
+              <%= @client_info.investment_type.fix_income %> %
+            </td>
+            <td>
+              <strong>Equity( Direct, MF, SIP) :</strong>
+              <%= @client_info.investment_type.equity %> %
+            </td>
+          </tr>
 
-    <hr/>
-    <h3><p style="text-align: center;">
-      <strong>Investment</strong><br/><br/>
-    </p></h3>
-    <table style="width: 1000px;">
-      <tr style="height: 40px;">
-        <td>
-          <strong>Fixed Income ( FD, POST, PPF):</strong>
-          <%= @client_info.investment_type.fix_income %> %
-        </td>
-        <td>
-          <strong>Equity( Direct, MF, SIP) :</strong>
-          <%= @client_info.investment_type.equity %> %
-        </td>
-      </tr>
+          <tr style="height: 40px;">
+            <td>
+              <strong>Gold:</strong>
+              <%= @client_info.investment_type.gold %> %
+            </td>
+            <td>
+              <strong>Land & Estate:</strong>
+              <%= @client_info.investment_type.land_and_estate %> %
+            </td>
+          </tr>
+        </table>
+    <% end %>
 
-      <tr style="height: 40px;">
-        <td>
-          <strong>Gold:</strong>
-          <%= @client_info.investment_type.gold %> %
-        </td>
-        <td>
-          <strong>Land & Estate:</strong>
-          <%= @client_info.investment_type.land_and_estate %> %
-        </td>
-      </tr>
-    </table>
+    <% unless @client_info.house.nil? or @client_info.vehicle.nil? %>
 
     <hr/>
     <h3><p style="text-align: center;">
       <strong>Personal Assets</strong><br/>
     </p></h3>
+    <% unless @client_info.house.nil? %>
+
     <h4><p>
       <strong>House</strong>
     </p></h4>
@@ -244,6 +251,8 @@
         </td>
       </tr>
     </table>
+    <% end %>
+    <% unless @client_info.vehicle.nil? %>
 
     <h4><p>
       <strong>Vehicle</strong>
@@ -269,7 +278,8 @@
         </td>
       </tr>
     </table>
-
+    <% end %>
+    <% end %>
     <%= link_to 'Edit', edit_client_info_path(@client_info), :class => "btn" %> |
     <%= link_to 'Back', client_infos_path, :class => "btn" %>
   </div>

@@ -99,35 +99,16 @@
             <Cell><Data ss:Type="String"><%= client_info.plan_child_education %></Data></Cell>
             <Cell><Data ss:Type="String"><%= client_info.plan_child_marriage %></Data></Cell>
             <Cell><Data ss:Type="String"><%= client_info.plan_retirement_fund %></Data></Cell>
-            <% if !client_info.investment_type.nil? %>
-                <Cell><Data ss:Type="Float"><%= client_info.investment_type.fix_income %></Data></Cell>
-                <Cell><Data ss:Type="Float"><%= client_info.investment_type.equity %></Data></Cell>
-                <Cell><Data ss:Type="Float"><%= client_info.investment_type.gold %></Data></Cell>
-                <Cell><Data ss:Type="Float"><%= client_info.investment_type.land_and_estate %></Data></Cell>
-            <% else %>
-                <Cell><Data ss:Type="Float">0</Data></Cell>
-                <Cell><Data ss:Type="Float">0</Data></Cell>
-                <Cell><Data ss:Type="Float">0</Data></Cell>
-                <Cell><Data ss:Type="Float">0</Data></Cell>
-            <% end %>
-            <% if !client_info.house.nil? %>
-                <Cell><Data ss:Type="Number"><%= client_info.house.owned %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= client_info.house.rented %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= client_info.house.co_provider %></Data></Cell>
-            <% else %>
-                <Cell><Data ss:Type="Number">0</Data></Cell>
-                <Cell><Data ss:Type="Number">0</Data></Cell>
-                <Cell><Data ss:Type="Number">0</Data></Cell>
-            <% end %>
-            <% if !client_info.vehicle.nil? %>
-                <Cell><Data ss:Type="Number"><%= client_info.vehicle.four_wheeler %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= client_info.vehicle.two_wheeler %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= client_info.vehicle.none %></Data></Cell>
-            <% else %>
-                <Cell><Data ss:Type="Number">0</Data></Cell>
-                <Cell><Data ss:Type="Number">0</Data></Cell>
-                <Cell><Data ss:Type="Number">0</Data></Cell>
-            <% end %>
+            <Cell><Data ss:Type="Float"><%= !client_info.investment_type.nil? ? client_info.investment_type.fix_income : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= !client_info.investment_type.nil? ? client_info.investment_type.equity : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= !client_info.investment_type.nil? ? client_info.investment_type.gold :0 %></Data></Cell>
+            <Cell><Data ss:Type="Float"><%= !client_info.investment_type.nil? ? client_info.investment_type.land_and_estate : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= !client_info.house.nil? ? client_info.house.owned : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= !client_info.house.nil? ? client_info.house.rented : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= !client_info.house.nil? ? client_info.house.co_provider : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= !client_info.vehicle.nil? ? client_info.vehicle.four_wheeler : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= !client_info.vehicle.nil? ? client_info.vehicle.two_wheeler : 0 %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= !client_info.vehicle.nil? ? client_info.vehicle.none : 0 %></Data></Cell>
           </Row>
       <% end %>
     </Table>
