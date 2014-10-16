@@ -1,0 +1,36 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title btn">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Today's Client Birthday
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table>
+          <% if @clientbirthdate.present? and !@clientbirthdate.blank? %>
+              <tr>
+                <th style="width: 200px; text-align: center;">Name</th>
+                <th style="width: 200px; text-align: center;">Mobile</th>
+                <th style="width: 200px; text-align: center;">Email</th>
+              </tr>
+
+              <% @clientbirthdate.each do |client| %>
+                  <tr>
+                    <td style="width: 200px; text-align: center;"><%= client.name %></td>
+                    <td style="width: 200px; text-align: center;"><%= client.mobile %></td>
+                    <td style="width: 200px; text-align: center;"><%= client.email %></td>
+                  </tr>
+              <% end %>
+          <% else %>
+              <tr>
+                No reminder for Client's Birthday
+              </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
